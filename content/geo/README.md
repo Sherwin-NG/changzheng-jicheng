@@ -4,7 +4,7 @@
 
 - `land.json`：50m 陆地，裁到窗口里。
 - `rivers.json`：Natural Earth 1:1000 万（数据集名 10m）具名河网中的长江、金沙江、湘江、乌江、大渡河、岷江、嘉陵江、黄河等。只用来认方位，不能当战场线。
-- `chishui.json`：OpenStreetMap 中名称为「赤水河」的河道，2026-11-18 提取，ODbL。1:1000 万河网里没有这条具名河，所以不用缺数据当理由另画一条。茅台镇距这条河约 1 公里。
+- `chishui.json`：OpenStreetMap 中名称为「赤水河」的河道，2026-11-18 提取后简化。© OpenStreetMap contributors，ODbL 1.0（https://opendatacommons.org/licenses/odbl/1-0/ ，版权说明 https://www.openstreetmap.org/copyright ）。同一文件也放在 `public/geo/chishui.json`，建成的网站可以用 `./geo/chishui.json` 下载。茅台镇距这条河约 1 公里。
 - `provinces.json`：50m 当代中国一级政区。这是今行政区划，不是 1934–1936 年省界。西康等民国省界没有取得可再分发的文件，因此不画。
 - `places.json`：30 个 Wikidata P625 近似坐标。`geometry_level` 标明是遗址、镇、县城还是山体。县城坐标不能当成渡口。
 

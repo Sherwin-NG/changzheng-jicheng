@@ -135,6 +135,8 @@ for (let i = 0; i < mapCount; i += 1) {
   const ratio = Math.abs(info.ew - info.ns) / info.ew;
   check(`比例尺同比例 ${info.title}`, ratio < 0.08 && info.ew + 24 < info.w, JSON.stringify(info));
 }
+await home.page.locator("svg.geo-map").nth(1).screenshot({ path: join(shotDir, "desktop-xiang-map.png") });
+await home.page.locator("svg.geo-map").nth(2).screenshot({ path: join(shotDir, "desktop-chishui-map.png") });
 await home.page.locator("svg.geo-map").nth(4).screenshot({ path: join(shotDir, "desktop-snow-map.png") });
 const overflow = await home.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 check("路线页无横向溢出", overflow <= 1, String(overflow));

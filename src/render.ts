@@ -16,7 +16,7 @@ import {
   type PageId,
   yearOf,
 } from "./content";
-import { frames, legendHtml, renderMap } from "./atlas";
+import { frames, legendHtml, osmCreditHtml, renderMap } from "./atlas";
 import { esc, sourceCard, sourceChips } from "./format";
 import { photo, shippedMedia } from "./figures";
 import { renderMarkdown } from "./md";
@@ -379,7 +379,10 @@ function mapBlock(frameId: keyof typeof frames, prose: string): string {
     <div class="reading">${prose}</div>
     <figure class="map-figure">
       ${drawn.svg}
-      <figcaption>示意图，非精确行军轨迹。虚线只连接相距较近的已知点。蓝色河是 Natural Earth 1:1000万概化河网；赤水河另据 OpenStreetMap 的具名河道。灰色虚线是今省级行政区，不是一九三五年省界。西康没有画。</figcaption>
+      <figcaption>
+        <p>示意图，非精确行军轨迹。虚线只连接相距较近的已知点。蓝色河是 Natural Earth 1:1000万概化河网，只用来认方位。灰色虚线是今省级行政区，不是一九三五年省界。西康没有画。</p>
+        ${osmCreditHtml()}
+      </figcaption>
     </figure>
     <div class="table-wrap">${drawn.table}</div>
   </section>`;
@@ -416,7 +419,10 @@ function renderRoutes(): string {
     <div class="map-layout">
       <figure class="map-figure">
         ${overview.svg}
-        <figcaption>阿尔伯斯投影，标准纬线 25° 和 40°，东西和南北用同一个比例。比例尺在左下角，按投影上的距离画出。示意图，非精确行军轨迹。浅色范围不是行军线。</figcaption>
+        <figcaption>
+          <p>阿尔伯斯投影，标准纬线 25° 和 40°，东西和南北用同一个比例。比例尺在左下角，按投影上的距离画出。示意图，非精确行军轨迹。浅色范围不是行军线。</p>
+          ${osmCreditHtml()}
+        </figcaption>
       </figure>
       <div id="node-panel" class="node-panel" aria-live="polite">
         <p>点一个符号，或点下面的名单。说明只重复核链稿里的角色；坐标写明是县城、镇还是遗址。</p>
@@ -424,10 +430,10 @@ function renderRoutes(): string {
     </div>
     <div class="table-wrap">${overview.table}</div>
     <ul class="rules">${routeMeta.rules.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>
-    ${mapBlock("xiang", `<h2>湘江</h2><p>道县、兴安、全州是三个县城，不是渡口。蓝线是湘江干流：兴安、全州靠近江，道县在东边的支流一带，不在这条干流上。方框只表示战役发生在这三县之间，没有把三座县城连成一条进军线。这里没有可合法使用的战场照片，不用长沙的江景来顶。过江以后人数大减，通道、黎平才把方向改向贵州。</p>`)}
-    ${mapBlock("chishui", `<h2>赤水</h2><p>图上的蓝线是 OpenStreetMap 里名叫赤水河的河道，茅台镇在河附近。习水是县城，赤水是市政府所在地，都不能当成某一次的桥。乌江如果出现，是另一条河。一渡、二渡、四渡的桥点没有核验坐标，只留这块范围，不编渡口。茅台是三渡的通行地点之一。</p>${photo("img-chishui-maotai-2016")}`)}
+    ${mapBlock("xiang", `<h2>湘江</h2><p>道县、兴安、全州是三个县城，不是渡口。蓝线是湘江干流：兴安、全州靠近江，道县在东边的支流一带，不在这条干流上。浅色方框只表示战役发生在这三县之间，不是一条进军折线。框上不再写字，以免挡住全州。这里没有可合法使用的战场照片，不用长沙的江景来顶。过江以后人数大减，通道、黎平才把方向改向贵州。</p>`)}
+    ${mapBlock("chishui", `<h2>赤水</h2><p>蓝线是赤水河。浅色方框是四次渡河的阅读范围，不标桥，框上不写字，免得和「赤水」叠成别的河名。茅台镇在河附近，是三渡的通行地点之一。习水是县城，赤水是市政府所在地，都不能当成某一次的桥。乌江如果出现，是另一条河。</p>${photo("img-chishui-maotai-2016")}`)}
     ${mapBlock("jinsha", `<h2>金沙江和大渡河</h2><p>图上的皎平渡是渡口遗址，不是南边约二十公里的镇驻地。安顺场的渡口窄，后面的部队沿河向北到泸定桥。渡口到安顺场大约三百五十公里，中间没有逐日驻地，所以不连线。</p>${photo("img-jiaopingdu-bridge-2020")}${photo("img-dadu-terrace-2012")}${photo("img-luding-bridge-2018")}`)}
-    ${mapBlock("snow", `<h2>雪山和草地</h2><p>夹金山在小金以南。若尔盖到迭部的方框是草地的阅读范围，围的是这两个已核验的县城一带，不是测出来的湿地边界。小金和若尔盖之间还有两河口、毛儿盖，没有逐镇坐标，所以中间留白。</p>${photo("img-jiajin-pass-2013")}${photo("img-zoige-wetland-2013")}`)}
+    ${mapBlock("snow", `<h2>雪山和草地</h2><p>夹金山在宝兴与小金之间。浅色方框只罩住若尔盖县城一带，表示草地在这里，不是从若尔盖画到迭部的一条过草地路线。迭部仍是单独的点。小金和若尔盖之间还有两河口、毛儿盖，没有逐镇坐标，所以中间留白。宝兴标在图上。</p>${photo("img-jiajin-pass-2013")}${photo("img-zoige-wetland-2013")}`)}
     ${mapBlock("endings", `<h2>三个不能合成一点的结束</h2><p>吴起镇是中央红军这一路的结束，在今陕西。会宁在今甘肃，是和红四方面军会师的地方。将台堡在今宁夏西吉，当时的叙述常把它记在甘肃。三处不连成一条线。中央红军到吴起，并不等于一九三六年十月将台堡的总结束。将台堡不放纪念碑特写，位置看这张图。</p>${photo("img-huining-tower-2012")}${photo("img-wuqi-today-2010")}`)}
     <section class="reading">
       <h2>一张别人画的对照图</h2>
@@ -447,7 +453,7 @@ function pictureLedger(): string {
       return `<li><strong>${esc(item.place)}</strong> ${esc(item.title)}，${esc(item.dateLabel)}，${esc(item.artist)}。${license}。<a href="${esc(item.filePage)}">原始文件页</a>。${esc(item.derivative)}</li>`;
     })
     .join("");
-  return `<p>陆地、今省界和大多数河来自 Natural Earth，公共领域，比例尺是 1:1000 万。赤水河来自 OpenStreetMap 的具名河道，许可是 ODbL。西康等民国省界没有可再分发的数据，所以不画。皎平渡用的是渡口坐标，不是镇驻地。</p><ul class="plain">${rows}</ul>`;
+  return `<p>陆地、今省界和大多数河来自 Natural Earth，公共领域，比例尺是 1:1000 万。西康等民国省界没有可再分发的数据，所以不画。皎平渡用的是渡口坐标，不是镇驻地。</p>${osmCreditHtml()}<ul class="plain">${rows}</ul>`;
 }
 
 function renderMeetings(): string {

@@ -150,6 +150,7 @@ export interface Frame {
   segments: Segment[];
   ranges: RangeBox[];
   bands?: RangeBox[];
+  anchors?: { text: string; lon: number; lat: number }[];
   showProvinces: boolean;
 }
 
@@ -166,7 +167,6 @@ const closeSegments: Segment[] = [
   ["anshunchang", "luding-bridge"],
   ["luding-bridge", "jiajin"],
   ["jiajin", "xiaojin"],
-  ["zoige", "diebu"],
   ["diebu", "hadapu"],
 ].map(([a, b]) => ({ army: "central-red-army", a, b }));
 
@@ -185,9 +185,9 @@ export const frames: Record<string, Frame> = {
     labels: ["jiangtaibao", "huining", "wuqi", "hadapu", "ruijin", "yudu-site", "quanzhou", "zunyi-site", "maotai", "jiaopingdu", "luding-bridge", "jiajin", "zoige", "luoshan", "yanchuan", "ganzi", "sangzhi"],
     segments: closeSegments,
     ranges: [],
-    bands: [
-      { name: "红二十五军北上一带，不是行军线", army: "25th-army", west: 109.7, south: 31.7, east: 115.1, north: 37.3 },
-      { name: "红四方面军已知点一带，不是行军线", army: "fourth-front-army", west: 99.5, south: 30.6, east: 105.6, north: 36.1 },
+    anchors: [
+      { text: "今四川", lon: 105.15, lat: 31.35 },
+      { text: "今甘肃", lon: 103.55, lat: 36.55 },
     ],
     showProvinces: true,
   },
@@ -205,7 +205,7 @@ export const frames: Record<string, Frame> = {
     labels: ["daoxian", "xingan", "quanzhou"],
     only: ["daoxian", "xingan", "quanzhou"],
     segments: [],
-    ranges: [{ name: "战役地段，不是进军折线", west: 110.35, south: 25.25, east: 111.95, north: 26.15 }],
+    ranges: [{ name: "", west: 110.35, south: 25.25, east: 111.95, north: 26.15 }],
     showProvinces: true,
   },
   chishui: {
@@ -222,7 +222,7 @@ export const frames: Record<string, Frame> = {
     labels: ["zunyi-site", "maotai", "xishui", "chishui-city"],
     only: ["zunyi-site", "maotai", "xishui", "chishui-city"],
     segments: [],
-    ranges: [{ name: "渡河范围，不标桥", west: 105.45, south: 27.55, east: 106.7, north: 28.85 }],
+    ranges: [{ name: "", west: 105.45, south: 27.55, east: 106.7, north: 28.85 }],
     showProvinces: true,
   },
   jinsha: {
@@ -257,13 +257,10 @@ export const frames: Record<string, Frame> = {
     height: 780,
     symbol: 16,
     interactive: false,
-    labels: ["jiajin", "baoxing", "xiaojin", "zoige", "diebu"],
-    only: ["jiajin", "baoxing", "xiaojin", "zoige", "diebu"],
-    segments: [
-      { army: "central-red-army", a: "jiajin", b: "xiaojin" },
-      { army: "central-red-army", a: "zoige", b: "diebu" },
-    ],
-    ranges: [{ name: "草地示意范围", west: 102.15, south: 32.9, east: 103.9, north: 34.35 }],
+    labels: ["baoxing", "jiajin", "xiaojin", "zoige", "diebu"],
+    only: ["baoxing", "jiajin", "xiaojin", "zoige", "diebu"],
+    segments: [{ army: "central-red-army", a: "jiajin", b: "xiaojin" }],
+    ranges: [{ name: "", west: 102.55, south: 33.25, east: 103.4, north: 33.95 }],
     showProvinces: true,
   },
   endings: {
@@ -431,7 +428,6 @@ export function renderMap(frame: Frame): { svg: string; table: string; dropped: 
     })
     .join("");
 
-  const rangeLabels: string[] = [];
   const rangePaths = frame.ranges
     .map((range) => {
       const ring: LngLat[] = [
@@ -441,8 +437,6 @@ export function renderMap(frame: Frame): { svg: string; table: string; dropped: 
         [range.west, range.north],
         [range.west, range.south],
       ];
-      const [lx, ly] = sx((range.west + range.east) / 2, range.north - (range.north - range.south) * 0.12);
-      rangeLabels.push(`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" font-size="18" fill="#1c2420">${esc(range.name)}</text>`);
       return `<path d="${pathOf(ring)} Z" />`;
     })
     .join("");
@@ -464,17 +458,17 @@ export function renderMap(frame: Frame): { svg: string; table: string; dropped: 
   ];
   const labels: string[] = [];
   const textLabel = (text: string, x: number, y: number, size: number, fill: string, italic = false) => {
-    const width = text.length * size * 0.95;
-    const height = size * 1.2;
+    const width = text.length * size + 10;
+    const height = size * 1.35;
     const options = [
-      { x: x + 8, y: y - 8 },
-      { x: x + 10, y: y + size },
-      { x: x - width - 8, y: y + 4 },
-      { x: x - width / 2, y: y + size + 14 },
-      { x: x - width / 2, y: y - size - 6 },
+      { x: x - width / 2, y: y - size - 10 },
+      { x: x + 18, y: y + 4 },
+      { x: x - width - 18, y: y + 4 },
+      { x: x - width / 2, y: y + size + 18 },
+      { x: x + 28, y: y - size },
     ];
     for (const spot of options) {
-      const box = { x: spot.x, y: spot.y - size, w: width, h: height };
+      const box = { x: spot.x - 6, y: spot.y - size - 6, w: width + 12, h: height + 12 };
       if (box.x < 8 || box.y < 8 || box.x + box.w > frame.width - 8 || box.y + box.h > frame.height - 36) continue;
       if (taken.some((item) => boxesHit(item, box))) continue;
       taken.push(box);
@@ -495,6 +489,11 @@ export function renderMap(frame: Frame): { svg: string; table: string; dropped: 
     const bi = labelOrder.has(b.id) ? labelOrder.get(b.id)! : 1000;
     return ai - bi;
   });
+  for (const anchor of frame.anchors ?? []) {
+    const [ax, ay] = sx(anchor.lon, anchor.lat);
+    const markup = textLabel(anchor.text, ax, ay, 20, "#3d4a44");
+    if (markup) labels.push(markup);
+  }
   let dropped = 0;
   const symbols: string[] = [];
   for (const place of ordered) {
@@ -554,6 +553,7 @@ export function renderMap(frame: Frame): { svg: string; table: string; dropped: 
     for (const feature of provinces) {
       const name = String(feature.properties.name ?? "");
       if (!name || seenProvince.has(name)) continue;
+      if ((frame.anchors ?? []).some((anchor) => anchor.text === `今${name.replace("壮族自治区", "").replace("回族自治区", "").replace("维吾尔自治区", "").replace("自治区", "").replace("省", "").replace("市", "")}`)) continue;
       const rawLon = Number(feature.properties.label_lon);
       const rawLat = Number(feature.properties.label_lat);
       let lon = rawLon;
@@ -619,7 +619,7 @@ export function renderMap(frame: Frame): { svg: string; table: string; dropped: 
     <g class="ranges" fill="rgba(142,51,40,0.08)" stroke="#8e3328" stroke-width="2" stroke-dasharray="8 6">${rangePaths}</g>
     <g class="lanes" fill="none" stroke-width="5" stroke-linecap="round">${routePaths}</g>
     <g class="symbols">${symbols.join("")}</g>
-    <g class="map-labels" font-family="Noto Sans SC, sans-serif" stroke="#ffffff" stroke-width="5" paint-order="stroke" stroke-linejoin="round">${labels.join("")}${bandLabels.join("")}${rangeLabels.join("")}</g>
+    <g class="map-labels" font-family="Noto Sans SC, sans-serif" stroke="#ffffff" stroke-width="5" paint-order="stroke" stroke-linejoin="round">${labels.join("")}${bandLabels.join("")}</g>
     <g class="north" transform="translate(${frame.width - 46} 36)" aria-hidden="true">
       <polygon points="0,-16 7,12 -7,12" fill="#1c2420" />
       <text x="0" y="28" text-anchor="middle" font-size="18" font-family="Noto Sans SC, sans-serif" fill="#1c2420" stroke="#ffffff" stroke-width="4" paint-order="stroke">北</text>
@@ -642,6 +642,10 @@ export function renderMap(frame: Frame): { svg: string; table: string; dropped: 
   return { svg, table: tableHtml, dropped };
 }
 
+export function osmCreditHtml(): string {
+  return `<p class="osm-credit">赤水河派生地理数据 © OpenStreetMap contributors。版权说明见 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap copyright</a>。数据按 <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a> 提供，可下载本地文件 <a href="./geo/chishui.json">chishui.json</a>。该文件保留同样的归属和许可。</p>`;
+}
+
 export function legendHtml(): string {
   const items = Object.entries(ARMY_STYLE)
     .map(([id, style]) => {
@@ -653,8 +657,9 @@ export function legendHtml(): string {
     ${items}
     <li>一个地点和几路都有关时，几种形状并排。</li>
     <li><span class="swatch swatch-line"></span>虚线只连接相距较近的已知点，表示先后方向</li>
-    <li><span class="swatch swatch-river"></span>蓝色线是 Natural Earth 1:1000万概化河网。赤水河来自 OpenStreetMap 的具名河道。都只用来认方位，不是战场测量线</li>
+    <li><span class="swatch swatch-river"></span>蓝色线是 Natural Earth 1:1000万概化河网，只用来认方位，不是战场测量线。</li>
     <li><span class="swatch swatch-admin"></span>灰色虚线是今省级行政区，图内省名带「今」。不是1935年省界。西康未画</li>
     <li>浅色范围是示意地带，不是行军线，也不是测绘边界</li>
-  </ul>`;
+  </ul>
+  ${osmCreditHtml()}`;
 }
