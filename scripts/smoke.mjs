@@ -69,7 +69,8 @@ check("首页无控制台错误", home.errors.length === 0, home.errors.join(" |
 check("首页标题", (await home.page.locator("h1").innerText()).includes("长征纪程"));
 check("独立整理声明", (await home.page.locator("body").innerText()).includes("不是博物馆"));
 check("吴起与总结束分开", (await home.page.locator("body").innerText()).includes("并不等于整个长征"));
-await home.page.screenshot({ path: join(shotDir, "desktop-home.png"), fullPage: true });
+await home.page.screenshot({ path: join(shotDir, "desktop-home.png"), fullPage: false });
+await home.page.locator(".geo-map").first().screenshot({ path: join(shotDir, "desktop-home-map.png") });
 
 await home.page.locator("a.button", { hasText: "进入年表" }).click();
 await home.page.waitForURL(/timeline\.html/);
@@ -117,8 +118,33 @@ await home.page.goto("http://127.0.0.1:43123/routes.html", { waitUntil: "network
 check("路线免责声明可见", await home.page.locator("#map-disclaimer").isVisible());
 check("免责声明写明不是精确轨迹", (await home.page.locator("#map-disclaimer").innerText()).includes("精确"));
 check("没有关闭免责声明的按钮", (await home.page.locator("#map-disclaimer button").count()) === 0);
+await home.page.locator(".geo-map").first().screenshot({ path: join(shotDir, "desktop-routes.png") });
+await home.page.screenshot({ path: join(shotDir, "desktop-routes-page.png"), fullPage: false });
 await home.page.locator(".node-jump", { hasText: "于都" }).click();
-check("节点说明含版面顺序", (await home.page.locator("#node-panel").innerText()).includes("不是经纬度"));
+check("节点说明写明不是精确轨迹", (await home.page.locator("#node-panel").innerText()).includes("非精确行军轨迹"));
+const mapText = await home.page.locator(".geo-map").first().evaluate((el) => el.textContent ?? "");
+check("总图有指北和比例尺", mapText.includes("北") && mapText.includes("公里"), mapText.slice(0, 180));
+const overflow = await home.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+check("路线页无横向溢出", overflow <= 1, String(overflow));
+const imgCount = await home.page.locator("img").count();
+const broken = [];
+for (let i = 0; i < imgCount; i += 1) {
+  const img = home.page.locator("img").nth(i);
+  await img.scrollIntoViewIfNeeded();
+  const result = await img.evaluate(async (el) => {
+    try {
+      await Promise.race([
+        el.decode(),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("timeout")), 8000)),
+      ]);
+    } catch {
+      /* decode timeout or error */
+    }
+    return { src: el.currentSrc || el.src, width: el.naturalWidth };
+  });
+  if (result.width === 0) broken.push(result.src);
+}
+check("路线页图片可解码", broken.length === 0, `${imgCount} 张；${broken.join(" | ")}`);
 await home.page.screenshot({ path: join(shotDir, "desktop-routes.png"), fullPage: false });
 await home.page.locator("input[name='lane']").evaluateAll((boxes) => boxes.forEach((box) => {
   box.checked = false;
@@ -126,6 +152,12 @@ await home.page.locator("input[name='lane']").evaluateAll((boxes) => boxes.forEa
 }));
 check("路线全部关闭有反馈", await home.page.locator("#map-empty").isVisible());
 
+await home.page.goto("http://127.0.0.1:43123/battles.html", { waitUntil: "networkidle" });
+check("战役页有湘江说明", (await home.page.locator("body").innerText()).includes("不用长沙"));
+await home.page.screenshot({ path: join(shotDir, "desktop-battles.png"), fullPage: false });
+await home.page.locator(".geo-map").first().screenshot({ path: join(shotDir, "desktop-battles-map.png") });
+const battleOverflow = await home.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+check("战役页无横向溢出", battleOverflow <= 1, String(battleOverflow));
 await home.page.goto("http://127.0.0.1:43123/forces.html", { waitUntil: "networkidle" });
 const forces = await home.page.locator("body").innerText();
 check("四路页并列红四起点", forces.includes("3月说") && forces.includes("5月说"));
@@ -145,7 +177,13 @@ check("手机筛选中央红军", (await mobileHome.page.locator("#filter-status
 await mobileHome.page.screenshot({ path: join(shotDir, "mobile-timeline.png"), fullPage: false });
 await mobileHome.page.goto("http://127.0.0.1:43123/routes.html", { waitUntil: "networkidle" });
 check("手机路线免责声明", await mobileHome.page.locator("#map-disclaimer").isVisible());
-await mobileHome.page.screenshot({ path: join(shotDir, "mobile-routes.png"), fullPage: false });
+const mobileOverflow = await mobileHome.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+check("手机路线无横向溢出", mobileOverflow <= 1, String(mobileOverflow));
+await mobileHome.page.locator(".geo-map").first().screenshot({ path: join(shotDir, "mobile-routes.png") });
+await mobileHome.page.goto("http://127.0.0.1:43123/index.html", { waitUntil: "networkidle" });
+const mobileHomeOverflow = await mobileHome.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+check("手机首页无横向溢出", mobileHomeOverflow <= 1, String(mobileHomeOverflow));
+await mobileHome.page.screenshot({ path: join(shotDir, "mobile-home.png"), fullPage: false });
 
 const sub = await open("http://127.0.0.1:43124/changzheng/index.html", desktop);
 check("子路径页面", sub.status === 200);

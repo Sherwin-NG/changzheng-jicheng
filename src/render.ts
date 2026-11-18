@@ -16,89 +16,102 @@ import {
   type PageId,
   yearOf,
 } from "./content";
+import { frames, legendHtml, renderMap } from "./atlas";
 import { esc, sourceCard, sourceChips } from "./format";
+import { mediaById, photo, shippedMedia } from "./figures";
 import { renderMarkdown } from "./md";
 import { shell } from "./shell";
 
 export function renderPage(page: PageId): string {
   const body = {
     home: renderHome,
-    background: () => essayPage("背景", "贰", "把时段和各路分开", extractH2(research, "整体历史背景")),
+    background: () =>
+      essayPage(
+        "把时段和各路分开",
+        "两年里走的不是同一支队伍，结束的日子也不在同一天。下面是核链主文里的背景，源号可以点开。",
+        extractH2(research, "整体历史背景"),
+        `${photo("img-ruijin-yunshishan-2010")}<p>瑞金云石山是今天能走到的山。中央机关一九三四年十月十日从瑞金出发，主力渡河是几天后在于都。这座山的照片不能代替那两天的差别。</p>`,
+      ),
     forces: renderForces,
     timeline: renderTimeline,
     routes: renderRoutes,
     meetings: renderMeetings,
     battles: renderBattles,
     people: renderPeople,
-    march: () => essayPage("行军", "玖", "地理、后勤与沿途民众", extractH2(research, "地理、后勤")),
+    march: () =>
+      essayPage(
+        "江、山、草地和沿途的人",
+        "行军写的是路怎么走、粮食从哪里来、沿途的人遇到了什么。照片是今天的山口和湿地。",
+        extractH2(research, "地理、后勤"),
+        `${photo("img-jiajin-pass-2013")}<p>夹金山垭口是二〇一三年的样子。一九三五年红军从这里翻过雪山时，没有留下可以公开使用的现场照片。</p>${photo("img-zoige-wetland-2013")}<p>若尔盖湿地说明草地是一片洼地和水草，不是地图上可以一笔画过的细线。</p>`,
+      ),
     sources: renderSources,
   }[page]();
   return shell(page, body);
 }
 
-function chapter(index: string, kicker: string, title: string, lede: string): string {
+function chapter(title: string, lede: string): string {
   return `<header class="chapter wrap">
-    <p class="chapter-index">${esc(index)}</p>
-    <div>
-      <p class="kicker">${esc(kicker)}</p>
-      <h1>${esc(title)}</h1>
-      <p class="lede">${lede}</p>
-    </div>
+    <h1>${esc(title)}</h1>
+    <p class="lede">${lede}</p>
   </header>`;
 }
 
 function renderHome(): string {
   const overall = armies.overall;
   const picked = ["F01", "F02", "F07", "F06", "F05"].map((id) => facts.find((f) => f.id === id)!);
+  const blurbs: Record<string, string> = {
+    background: "两年、四路，结束的日子不在同一天。",
+    forces: "各路自己的出发、结束和人数。",
+    timeline: "三十七个节点，可以按部队筛选。",
+    routes: "用坐标看谁在东、谁在北，线不是轨迹。",
+    meetings: "从通道转到榜罗镇，方向是一次次改的。",
+    battles: "只写核过的战斗。湘江没有现场照片，用地图说明。",
+    people: "只写已经核过的职责。",
+    march: "江、雪山、草地，以及沿途的人。",
+    sources: "不同的数字放在一起，每条都能点开。",
+  };
   const toc = PAGES.filter((p) => p.id !== "home")
-    .map(
-      (p) => `<li><a href="${p.href}"><span>${esc(p.index)} ${esc(p.label)}</span><span class="dots"></span><span>阅读</span></a></li>`,
-    )
+    .map((p) => `<li><a href="${p.href}">${esc(p.label)}</a><p>${esc(blurbs[p.id] ?? "")}</p></li>`)
     .join("");
-  return `<section class="hero wrap">
+  const homeMap = renderMap({ ...frames.overview, id: "home-map", interactive: false });
+  return `<article class="opening wrap">
     <div>
-      <p class="kicker">独立整理 · 非官方展览</p>
       <h1>长征纪程</h1>
-      <p class="lede">一九三四年十月至一九三六年十月，四路红军先后离开根据地、在西北会师。这一路不是一条线：中央红军一九三五年十月到达吴起镇，并不等于整个长征在那一天结束。</p>
-      <p>本站是独立整理，不是博物馆、档案馆或党史机构的展览。日期、人数、里程和省份口径并列，每条都能点开来源。路线图只标示意节点，不断成精确轨迹，也不使用未授权的历史照片。</p>
-      <p class="actions"><a class="button" href="./timeline.html">进入年表</a><a class="button button-quiet" href="./routes.html">看路线示意</a></p>
+      <p class="lede">一九三四年十月至一九三六年十月，四路红军先后离开根据地，在西北会师。中央红军一九三五年十月到达吴起镇，并不等于整个长征在那一天结束。</p>
+      <p>本站是独立整理，不是博物馆、档案馆或党史机构的展览。日期、人数、里程和省份有几种说法，就并列写着，每条都能点开来源。</p>
+      <p class="actions"><a class="button" href="./timeline.html">进入年表</a> <a href="./routes.html">看四路的地图</a></p>
     </div>
-    <aside class="hero-aside" aria-label="三条不能合并的时间">
-      <h2>先分开这三层</h2>
-      <ol>
-        <li><strong>整个长征</strong><span>1934年10月至1936年10月22日将台堡会师</span></li>
-        <li><strong>中央红军本路</strong><span>1935年10月19日到吴起镇，22日会议宣告本路结束</span></li>
-        <li><strong>另外三路</strong><span>红二十五军、红四方面军、红二方面军各有自己的出发和结束</span></li>
-      </ol>
-    </aside>
+    ${photo("img-yudu-ferry-2014", { eager: true })}
+  </article>
+  <section class="wrap reading">
+    <h2>先把三层时间分开</h2>
+    <p>整个长征写到一九三六年十月二十二日将台堡会师。</p>
+    <p>中央红军这一路，一九三五年十月十九日到吴起镇，二十二日的会议宣告的是这一路结束。</p>
+    <p>红二十五军、红四方面军、红二方面军各有自己的出发和结束。</p>
+    <h2>容易写混的几件事</h2>
+    ${picked.map(factCard).join("")}
+    <h2>${esc(armies.concept.label)}</h2>
+    <p>${esc(armies.concept.meaning)}。</p>
+    ${sourceChips(armies.concept.sources)}
+    <p>通行时段是${esc(overall.duration_description)}。当时的叙述是${esc(String(overall.provinces_then.count))}省，按今天的区划是${esc(String(overall.provinces_now.count))}个省级行政区。战役战斗的通行说法是${esc(overall.campaigns_count)}。</p>
+    ${sourceChips(overall.sources)}
+    <p>${esc(overall.provinces_then.note)}。${esc(overall.provinces_now.note)}。省份名单不拿来反推未经核验的每日路线。</p>
+    <p>起点常用一九三四年十月十日中央和中革军委由瑞金出发。于都河以北是十六日集结完毕、十七日起渡河。两层日期都保留。上面那张渡口照片拍于二〇一四年，不是一九三四年的现场。</p>
   </section>
-  <section class="wrap band">
-    <h2>容易混成一句话的几件事</h2>
-    <div class="callouts">${picked.map(factCard).join("")}</div>
+  <section class="wrap map-block">
+    <h2>四路不在一条线上</h2>
+    <p>赣南在东，陕甘在北。红二十五军从河南罗山一带北上，红二、红六军团从湘西出来，红四方面军的已知点多在川西和甘南。空白的地方是还没有核到坐标的路段，不是他们没有走过。</p>
+    <figure class="map-figure">
+      ${homeMap.svg}
+      <figcaption>示意图，非精确行军轨迹。虚线只连接相距较近的已知点。灰色虚线是今省级行政区，不是一九三五年的省界。河网是 Natural Earth 的低精度数据，用来认方位。</figcaption>
+    </figure>
+    ${legendHtml()}
+    <p><a href="./routes.html">地图的读法和四张局部图</a></p>
   </section>
-  <section class="wrap split-2">
-    <div>
-      <p class="kicker">阅读结构</p>
-      <h2>${esc(armies.concept.label)}：四路对照，而不是一条红飘带</h2>
-      <p>${esc(armies.concept.meaning)}。</p>
-      ${sourceChips(armies.concept.sources)}
-      <dl class="stats">
-        <div><dt>通行时段</dt><dd>${esc(overall.duration_description)}</dd></div>
-        <div><dt>当时途经</dt><dd>${esc(String(overall.provinces_then.count))}省</dd></div>
-        <div><dt>按今区划</dt><dd>${esc(String(overall.provinces_now.count))}个省级行政区</dd></div>
-        <div><dt>战役战斗</dt><dd>${esc(overall.campaigns_count)}</dd></div>
-      </dl>
-      ${sourceChips(overall.sources)}
-      <p class="note">${esc(overall.provinces_then.note)}。${esc(overall.provinces_now.note)}。省份名单不拿来反推未经核验的每日路线。</p>
-    </div>
-    <div>
-      <p class="kicker">目录</p>
-      <ol class="toc">${toc}</ol>
-    </div>
-  </section>
-  <section class="wrap note-block">
-    <p>起点标志常用一九三四年十月十日中央和中革军委由瑞金出发，但于都河以北是十六日集结完毕、十七日起渡河。两层日期都保留。</p>
-    <p>照片和文物图像不在本次核链的授权范围内，本站不放历史照片，也不把示意图说成测绘成果。</p>
+  <section class="wrap">
+    <h2>分章读</h2>
+    <ul class="contents">${toc}</ul>
   </section>`;
 }
 
@@ -116,14 +129,14 @@ function factCard(fact: { id: string; topic: string; canonical: string; variants
   </article>`;
 }
 
-function essayPage(kicker: string, index: string, title: string, md: string): string {
-  return `${chapter(index, kicker, title, "以下段落转录自核链主文，源号可点开。没有另写主文以外的情节。")}
-  <article class="wrap prose">${renderMarkdown(md)}</article>`;
+function essayPage(title: string, lede: string, md: string, extra = ""): string {
+  return `${chapter(title, lede)}
+  <article class="wrap reading">${extra}${renderMarkdown(md)}</article>`;
 }
 
 function renderForces(): string {
   const cards = armies.items.map(renderForce).join("");
-  return `${chapter("叁", "四路红军", "出发、结束和人数都按各路自己的口径", "整个长征是“3＋1”。用中央红军的二万五千里或吴起镇，不能代替另外三路。")}
+  return `${chapter("出发、结束和人数都按各路自己的口径", "整个长征是“3＋1”。用中央红军的二万五千里或吴起镇，不能代替另外三路。")}
   <div class="wrap force-stack">${cards}</div>`;
 }
 
@@ -185,8 +198,7 @@ function renderForce(input: (typeof armies.items)[number]): string {
   if (force.id === "central-red-army") {
     const f = force;
     return `<article class="force" id="${esc(f.id)}">
-      <p class="kicker">第一路出发</p>
-      <h2>${esc(f.name)} <span>／ ${esc(f.later_name)}</span></h2>
+      <h2>${esc(f.name)}，后来称${esc(f.later_name)}</h2>
       <p>${esc(f.notes)}</p>
       <div class="split-2 tight">
         <section>
@@ -211,8 +223,8 @@ function renderForce(input: (typeof armies.items)[number]): string {
   if (force.id === "25th-army") {
     const f = force;
     return `<article class="force" id="${esc(f.id)}">
-      <p class="kicker">第二路出发 · ${esc(f.banner_on_departure)}</p>
       <h2>${esc(f.name)}</h2>
+      <p>出发时的旗帜写的是${esc(f.banner_on_departure)}。</p>
       <p>出发：${esc(f.start.date)}，${esc(f.start.place)}。军长 ${esc(f.leaders_on_departure.commander)}，副军长 ${esc(f.leaders_on_departure.deputy_commander)}，政治委员 ${esc(f.leaders_on_departure.political_commissar)}。</p>
       <h3>抵达、会师、合编是三天</h3>
       <ol class="date-steps">
@@ -247,8 +259,8 @@ function renderForce(input: (typeof armies.items)[number]): string {
       })
       .join("");
     return `<article class="force" id="${esc(f.id)}">
-      <p class="kicker">起点有两种说法，并列，不裁定</p>
       <h2>${esc(f.name)}</h2>
+      <p>起点有两种说法，并列，不裁定成一个日子。</p>
       <div class="split-2 tight">${accounts}</div>
       <p class="warn">不要把 3 月说和 5 月说合成一个“正式出发日”。</p>
       <p>本路会师：${esc(f.end.date)}，${esc(f.end.place)}。历时写法要和所选起点一致：${esc(f.duration)}。</p>
@@ -270,8 +282,7 @@ function renderForce(input: (typeof armies.items)[number]): string {
     })
     .join("");
   return `<article class="force" id="${esc(f.id)}">
-    <p class="kicker">最晚出发 · ${esc(f.later_name)}</p>
-    <h2>${esc(f.name)}</h2>
+    <h2>${esc(f.name)}，后来称${esc(f.later_name)}</h2>
     <p>出发：${esc(f.start.date)}，${esc(f.start.place)}。</p>
     <p>甘孜：${esc(f.ganzi_rendezvous.dates.join("、"))}，${esc(f.ganzi_rendezvous.note)}。地点 ${esc(f.ganzi_rendezvous.place)}。</p>
     <p>${esc(f.formation_of_front_army.date)} 组成红二方面军，包括 ${esc(f.formation_of_front_army.units)}。总指挥 ${esc(f.formation_of_front_army.commander)}，政治委员 ${esc(f.formation_of_front_army.political_commissar)}，副总指挥 ${esc(f.formation_of_front_army.deputy_commander)}，副政治委员 ${esc(f.formation_of_front_army.deputy_political_commissar)}。</p>
@@ -323,7 +334,7 @@ function renderTimeline(): string {
       </article>`;
     })
     .join("");
-  return `${chapter("肆", "年表", `${timeline.length} 个分开写的节点`, "可以按年份、部队和种类筛选。中央红军到达吴起镇，与一九三六年十月的总结束分成两条。")}
+  return `${chapter(`${timeline.length} 个分开写的节点`, "可以按年份、部队和种类筛选。中央红军到达吴起镇，与一九三六年十月的总结束分成两条。")}
   <div class="wrap timeline-layout">
     <form class="filters" id="timeline-filters">
       <fieldset>
@@ -356,43 +367,24 @@ function sourceBy(id: string) {
   return src ? sourceCard(src, false) : "";
 }
 
+function mapBlock(frameId: keyof typeof frames, prose: string): string {
+  const drawn = renderMap(frames[frameId]);
+  return `<section class="map-block" id="map-${frameId}">
+    <div class="reading">${prose}</div>
+    <figure class="map-figure">
+      ${drawn.svg}
+      <figcaption>示意图，非精确行军轨迹。点来自 Wikidata 的遗址、镇或县城坐标。虚线只表示相距较近的已知点谁先谁后。蓝色河网是 Natural Earth 10m，精度不够拿来当战场线。灰色虚线是今省级行政区，不是一九三五年省界。历史省界没有可再分发的数据，所以不画。</figcaption>
+    </figure>
+    <div class="table-wrap">${drawn.table}</div>
+  </section>`;
+}
+
 function renderRoutes(): string {
-  const lanes = [
-    { id: "central-red-army", y: 120 },
-    { id: "25th-army", y: 270 },
-    { id: "fourth-front-army", y: 420 },
-    { id: "second-front-army", y: 560 },
-  ];
-  const placed = nodes.map((node) => ({ ...node, lanes: lanesFor(node) }));
-  const pins: string[] = [];
-  const paths: string[] = [];
-  for (const lane of lanes) {
-    const mine = placed.filter((n) => n.lanes.includes(lane.id));
-    mine.sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id));
-    const pts = mine.map((n, i) => {
-      const x = mine.length === 1 ? 500 : 70 + (i / (mine.length - 1)) * 860;
-      return { ...n, x, y: lane.y };
-    });
-    if (pts.length >= 2) {
-      let d = `M ${pts[0].x} ${pts[0].y}`;
-      for (let i = 1; i < pts.length; i += 1) {
-        const p = pts[i - 1];
-        const c = pts[i];
-        const mx = (p.x + c.x) / 2;
-        d += ` C ${mx} ${p.y}, ${mx} ${c.y}, ${c.x} ${c.y}`;
-      }
-      paths.push(`<path data-lane="${lane.id}" d="${d}" />`);
-    }
-    for (const p of pts) {
-      const label = `${p.name}，${ARMY_LABEL[lane.id]}，版面位置，不是经纬度`;
-      pins.push(`<button type="button" class="node-pin" data-node="${esc(p.id)}" data-lanes="${esc(lane.id)}" style="left:${(p.x / 1000) * 100}%;top:${(p.y / 680) * 100}%" aria-pressed="false" aria-label="${esc(label)}">${esc(p.id.replace("N", ""))}</button>`);
-    }
-  }
   const list = nodes
     .map(
       (n) => `<li>
         <button type="button" class="node-jump" data-node="${esc(n.id)}">${esc(n.name)}</button>
-        <span>${esc(ARMY_LABEL[n.army] ?? n.army)} · ${esc(n.date)}</span>
+        <span>${esc(ARMY_LABEL[n.army] ?? n.army)} ${esc(n.date)}</span>
       </li>`,
     )
     .join("");
@@ -402,51 +394,65 @@ function renderRoutes(): string {
         `<label><input type="checkbox" name="lane" value="${esc(id)}" checked /> ${esc(label)}</label>`,
     )
     .join("");
-  return `${chapter("伍", "路线示意", "分路节点，不是测绘轨迹", "横轴只按阅读先后排列。圆点没有经纬度，不能连成“实际走过的红线”。")}
+  const overview = renderMap(frames.overview);
+  const schematic = mediaById("img-map-schematic-zh-svg");
+  const schematicFig = schematic?.ship_filename
+    ? `<figure class="plate">
+        <img src="./media/${esc(schematic.ship_filename)}" alt="后人绘制的中央红军1934至1935年路线示意图，不是本站地图，也不是精确轨迹" loading="lazy" decoding="async" />
+        <figcaption>
+          <p>${esc(schematic.caption_required)}</p>
+          <p>${esc(schematic.artist)}。${esc(schematic.years_label)}。许可 <a href="${esc(schematic.license_url ?? "")}">${esc(schematic.license)}</a>。<a href="${esc(schematic.file_page)}">原始文件页</a>。这不是本站画的总图。</p>
+        </figcaption>
+      </figure>`
+    : "";
+  return `${chapter("四路各自在哪里，不是一条红线", "北在图的上方。方块、圆点、菱形、三角各代表一路。虚线只连接离得较近的已知点，中间缺坐标的地方留白。")}
   <div class="wrap">
-    <p class="disclaimer" id="map-disclaimer">${esc(routeMeta.disclaimer)} ${esc(routeMeta.mapDisclaimer)} 背景里的山形和水纹是原创意象，不对应某座山或某条河。</p>
-    <ul class="rules">${routeMeta.rules.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>
+    <p class="disclaimer" id="map-disclaimer">${esc(routeMeta.disclaimer)} ${esc(routeMeta.mapDisclaimer)} 示意图，非精确行军轨迹。</p>
+    <p>中央红军从瑞金、于都往西，过湘江一带后转向贵州。遵义以后在赤水河附近往复，总图不把四次渡河连成一条折线。皎平渡和泸定桥之间隔着还没有逐镇坐标的路，所以中间断开。哈达铺到吴起还隔着榜罗镇和六盘山，这两处没有单独的点，也不连。</p>
+    <p>红二十五军只核到罗山县城和延川县城，相距太远，不画穿越河南、陕西的直线。红二、红六军团的桑植到甘孜也是这样。红四方面军的起点有三月、五月两种说法，总图上不替他们补一条从川陕边拉出来的线。</p>
+    ${legendHtml()}
     <fieldset class="lane-toggle" id="lane-toggle">
       <legend>显示哪一路</legend>
       ${checks}
     </fieldset>
     <p id="map-empty" class="empty" hidden>请至少选择一路。</p>
     <div class="map-layout">
-      <figure class="map-stage">
-        <div class="map-scroll">
-        <div class="map-canvas">
-        <svg viewBox="0 0 1000 680" role="img" aria-labelledby="map-title map-desc">
-          <title id="map-title">四路节点示意</title>
-          <desc id="map-desc">${esc(routeMeta.disclaimer)}</desc>
-          <rect width="1000" height="680" fill="#efe6d6" />
-          <g class="terrain" aria-hidden="true">
-            <path d="M0 180 C 160 120, 280 210, 420 150 C 560 90, 700 200, 1000 140 L 1000 230 C 760 250, 520 160, 300 230 C 160 280, 40 210, 0 250 Z" />
-            <path d="M0 360 C 180 300, 340 410, 520 340 C 700 270, 840 390, 1000 330 L 1000 410 C 780 450, 560 360, 340 430 C 180 480, 60 400, 0 450 Z" />
-            <path d="M40 520 C 200 480, 360 560, 560 510 C 760 460, 880 540, 980 500" fill="none" />
-          </g>
-          <g class="lanes">${paths.join("")}</g>
-        </svg>
-        <div class="pin-layer">${pins.join("")}</div>
-        </div>
-        </div>
-        <figcaption>无比例尺。横轴不是东西方向，纵轴也不是南北方向。节点多的一路可以横向滚动。</figcaption>
+      <figure class="map-figure">
+        ${overview.svg}
+        <figcaption>阿尔伯斯投影，标准纬线 25° 和 40°。比例尺标在图中央附近。示意图，非精确行军轨迹。</figcaption>
       </figure>
       <div id="node-panel" class="node-panel" aria-live="polite">
-        <p class="kicker">节点说明</p>
-        <p>选择一个圆点或下方名单。说明只重复核链稿里的角色和今地，不补每日驻地。</p>
+        <p>点一个符号，或点下面的名单。说明只重复核链稿里的角色；坐标写明是县城、镇还是遗址。</p>
       </div>
     </div>
+    <div class="table-wrap">${overview.table}</div>
+    <ul class="rules">${routeMeta.rules.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>
+    ${mapBlock("xiang", `<h2>湘江</h2><p>队伍离开于都之后，下一次能在图上站稳的是道县、兴安、全州三个县城。湘江战役发生在这三县之间。这里没有找到可以合法使用的战场或渡口照片，所以不用长沙的江景来顶。三个点都是今天的县城驻地，不是渡口测量点。过江以后人数大减，通道、黎平才把方向改向贵州。</p>`)}
+    ${mapBlock("chishui", `<h2>赤水</h2><p>四渡赤水发生在这条河的上下游。茅台是三渡的通行地点之一，图上的点是茅台镇。习水是县城，赤水市的点是市政府所在地，都不能当成某一次的桥。Natural Earth 的 10m 河网里没有具名的赤水河，所以不拿别的河来冒充，也不编四个渡口。一渡、二渡、四渡的桥点都缺核验坐标，只标这块范围。</p>${photo("img-chishui-maotai-2016")}`)}
+    ${mapBlock("jinsha", `<h2>金沙江和大渡河</h2><p>渡过金沙江选在皎平渡，是为了躲开下游已经设防的渡口。安顺场的渡口窄，后面的部队沿河向北，到泸定桥过河。皎平渡到安顺场相距大约三百五十公里，中间没有逐日驻地，图上不连。泸定桥再往北是夹金山。</p>${photo("img-jiaopingdu-carving-2020")}${photo("img-dadu-terrace-2012")}${photo("img-luding-bridge-2010")}`)}
+    ${mapBlock("snow", `<h2>雪山和草地</h2><p>夹金山是雪山的一个垭口，若尔盖代表川西北那一片湿地。懋功（今小金）到草地之间还有两河口、毛儿盖，没有逐镇坐标，所以两段之间留白。草地画成一块范围，不是某人某日的脚印。</p>${photo("img-jiajin-pass-2013")}${photo("img-zoige-wetland-2013")}`)}
+    ${mapBlock("endings", `<h2>三个不能合成一点的结束</h2><p>吴起镇是中央红军这一路的结束。会宁是和红四方面军会师的地方。将台堡在今宁夏西吉，历史叙述里常把它记在甘肃。三处隔着不同的距离。中央红军到吴起，并不等于一九三六年十月将台堡的总结束。</p>${photo("img-huining-tower-2012")}${photo("img-jiangtaibao-monument-2026")}${photo("img-wuqi-today-2010")}`)}
+    <section class="reading">
+      <h2>一张别人画的对照图</h2>
+      <p>下面这张是维基共享资源上的后期示意图，主要画中央红军一九三四到一九三五年。它不是本站的地图，也不能代表红二十五军、红四方面军和红二方面军。</p>
+      ${schematicFig}
+    </section>
+    <h2>三十五个节点</h2>
+    <p>名单仍是原来的三十五个。没有单独坐标的，图上不补点。</p>
     <ol class="node-list">${list}</ol>
   </div>`;
 }
 
-function lanesFor(node: { army: string; role: string }): string[] {
-  const ids = new Set<string>([node.army]);
-  if (node.role.includes("红四方面军")) ids.add("fourth-front-army");
-  if (node.role.includes("红一方面军") || node.role.includes("中央红军")) ids.add("central-red-army");
-  if (node.role.includes("红二")) ids.add("second-front-army");
-  if (node.role.includes("红二十五军")) ids.add("25th-army");
-  return [...ids];
+function pictureLedger(): string {
+  const rows = shippedMedia()
+    .map((item) => {
+      const license = item.license_url
+        ? `<a href="${esc(item.license_url)}">${esc(item.license)}</a>`
+        : esc(item.license);
+      return `<li><strong>${esc(item.place)}</strong> ${esc(item.years_label)}，${esc(item.artist)}。${license}。<a href="${esc(item.file_page)}">文件页</a>。${esc(item.derivative ?? "")} ${esc(item.caption_required)}</li>`;
+    })
+    .join("");
+  return `<p>底图陆地、河网和今省级行政区来自 Natural Earth，公共领域。图上可以写 Made with Natural Earth。民国省界没有下载到可再分发的文件，所以不画。坐标是 Wikidata P625，检索于 2026-11-18。</p><ul class="plain">${rows}</ul>`;
 }
 
 function renderMeetings(): string {
@@ -457,7 +463,7 @@ function renderMeetings(): string {
       return `<section class="group"><h2>${esc(name)}</h2>${items}</section>`;
     })
     .join("");
-  return `${chapter("陆", "会议", "一条决策链，不是单点", "通道还没有定下大方向，黎平才改向黔北，遵义解决军事和组织问题。落脚陕北要到榜罗镇才正式确定。")}
+  return `${chapter("方向是一次次改的", "通道还没有定下大方向，黎平才改向黔北，遵义解决军事和组织问题。落脚陕北要到榜罗镇才正式确定。")}
   <div class="wrap stack">${groups}</div>`;
 }
 
@@ -466,9 +472,18 @@ function meetingArticle(item: (typeof meetings)[number]): string {
   const evaluation = item.historical_evaluation
     ? `<h3>已核读的历史评价</h3><p>${esc(item.historical_evaluation)}</p>`
     : "";
+  const shot =
+    item.name === "黎平会议"
+      ? photo("img-liping-oldstreet-2006")
+      : item.name === "遵义会议"
+        ? photo("img-zunyi-site-2018")
+        : item.name === "哈达铺会议"
+          ? photo("img-hadapu-site-2026")
+          : "";
   return `<article class="entry" id="${esc(item.id)}">
     <div class="entry-meta"><time>${esc(item.date)}</time><span class="badge">${esc(item.level)}</span></div>
     <h3>${esc(item.name)}</h3>
+    ${shot}
     <p>${esc(item.place)}</p>
     ${note}
     <p>${esc(item.decision)}</p>
@@ -481,7 +496,7 @@ function renderBattles(): string {
   const later = new Set(["B11"]);
   const during = battles.filter((b) => !later.has(b.id));
   const after = battles.filter((b) => later.has(b.id));
-  return `${chapter("柒", "战役", "只写核读较充分的战斗", "直罗镇放在中央红军长征结束之后，不并进途中战役。三渡、四渡不补成未经核验的时刻表。")}
+  return `${chapter("只写核读较充分的战斗", "直罗镇放在中央红军长征结束之后，不并进途中战役。三渡、四渡不补成未经核验的时刻表。湘江没有合格的战场照片，这一段只用地图。")}
   <div class="wrap stack">
     <section><h2>途中</h2>${during.map(battleArticle).join("")}</section>
     <section><h2>落脚之后的奠基</h2>${after.map(battleArticle).join("")}</section>
@@ -494,9 +509,22 @@ function battlesJsonOverall(): string {
 }
 
 function battleArticle(item: (typeof battles)[number]): string {
+  const extra =
+    item.id === "B01"
+      ? mapBlock("xiang", "<p>湘江战役的地段在道县、兴安、全州之间。没有可核验的渡口照片，不用长沙江景代替。</p>")
+      : item.id === "B03"
+        ? photo("img-chishui-maotai-2016") + mapBlock("chishui", "<p>茅台镇的河岸是二〇一六年的样子。四次渡河的桥点没有逐一核验，图上只标范围。</p>")
+        : item.id === "B04"
+          ? photo("img-jiaopingdu-carving-2020")
+          : item.id === "B05"
+            ? photo("img-dadu-terrace-2012")
+            : item.id === "B06"
+              ? photo("img-luding-bridge-2010") + mapBlock("jinsha", "<p>皎平渡、安顺场和泸定桥不在一条可以连满的线上。安顺场到泸定桥这一小段才标了方向。</p>")
+              : "";
   return `<article class="entry" id="${esc(item.id)}">
     <div class="entry-meta"><time>${esc(item.date)}</time>${item.army.map((a) => `<span class="badge">${esc(ARMY_LABEL[a] ?? a)}</span>`).join("")}</div>
     <h3>${esc(item.name)}</h3>
+    ${extra}
     <p class="meta">${esc(item.place)}</p>
     <p>${esc(item.summary)}</p>
     ${item.significance ? `<p>${esc(item.significance)}</p>` : ""}
@@ -532,7 +560,7 @@ function renderPeople(): string {
       return `<section><h2>${esc(g.title)}</h2><div class="person-grid">${cards}</div></section>`;
     })
     .join("");
-  return `${chapter("捌", "人物", "只写已核职责", "不补籍贯、生卒和未核任职起止。姓名不全的英雄群体不在这里补名。泸定桥突击队的完整名单，核链稿写明至今不能全部确认。")}
+  return `${chapter("只写已核职责", "不补籍贯、生卒和未核任职起止。姓名不全的英雄群体不在这里补名。泸定桥突击队的完整名单，核链稿写明至今不能全部确认。")}
   <div class="wrap stack">${body}</div>`;
 }
 
@@ -555,12 +583,13 @@ function renderSources(): string {
     })
     .join("");
   const cards = sources.map((src) => sourceCard(src)).join("");
-  return `${chapter("拾", "口径与文献", "不同数字放在一起，不合成一个标准答案", "主表述和并列口径都保留。来源写明机构、题目和链接。握手失败不会被写成 404。")}
+  return `${chapter("不同数字放在一起，不合成一个标准答案", "主表述和并列口径都保留。来源写明机构、题目和链接。握手失败不会被写成 404。")}
   <div class="wrap stack" id="method">
     <section id="facts"><h2>必须分开的口径</h2>${factBlocks}</section>
     <section class="prose" id="essay-caliber"><h2>核链主文的说明</h2>${renderMarkdown(extractH2(research, "史料阅读与争议口径"))}</section>
     <section class="prose" id="spirit"><h2>长征精神的规范表述</h2>${renderMarkdown(extractH2(research, "长征精神的规范表述"))}</section>
     <section class="prose" id="reading"><h2>延伸阅读的边界</h2>${renderMarkdown(extractH2(research, "史料阅读建议"))}</section>
-    <section id="bibliography"><h2>22 条核心来源与 2 条补充</h2><p>下列链接使用核链稿记录的 HTTPS 地址。出版日来自各篇原文，不是本站的发表日。</p><div class="source-stack">${cards}</div>    </section>
+    <section id="bibliography"><h2>22 条核心来源与 2 条补充</h2><p>下列链接使用核链稿记录的 HTTPS 地址。出版日来自各篇原文，不是本站的发表日。</p><div class="source-stack">${cards}</div></section>
+    <section id="pictures"><h2>图片和底图</h2>${pictureLedger()}</section>
   </div>`;
 }
