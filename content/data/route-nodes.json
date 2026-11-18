@@ -1,0 +1,411 @@
+{
+  "schema_version": "1.0",
+  "disclaimer": "这些节点仅供示意打点，绝非精确行军轨迹。不得把节点连线宣传为测绘路线，不得补绘未经核验的每日驻地。不提供伪装成测绘成果的经纬度。",
+  "cartography_rules": [
+    "四路分层，可开关，避免重叠成一条红飘带就被当成唯一路线",
+    "出发地多元，至少同时标出瑞金与于都，并在说明中列出其他层面出发地",
+    "将台堡须同时标注历史地理表述与今属宁夏西吉",
+    "西康、重庆、宁夏的今昔行政区差异在图例中说明",
+    "赤水河、乌蒙山、草地等用区域示意，不要画成精确折线"
+  ],
+  "items": [
+    {
+      "id": "N01",
+      "name": "瑞金",
+      "modern": "江西省瑞金市",
+      "army": "central-red-army",
+      "role": "中央首脑机关长征出发地（标志意义）",
+      "date": "1934-10-10",
+      "sources": [
+        "S02",
+        "S19",
+        "S22"
+      ]
+    },
+    {
+      "id": "N02",
+      "name": "于都（于都河渡口/东门渡口等）",
+      "modern": "江西省于都县",
+      "army": "central-red-army",
+      "role": "主力集结出发地，习称长征第一渡",
+      "date": "1934-10-16/20",
+      "sources": [
+        "S02",
+        "S19"
+      ]
+    },
+    {
+      "id": "N03",
+      "name": "湘江（道县、全州一带）",
+      "modern": "湖南省道县、广西全州一带",
+      "army": "central-red-army",
+      "role": "第四道封锁线，湘江战役",
+      "date": "1934-11-25/12-01",
+      "sources": [
+        "S06"
+      ]
+    },
+    {
+      "id": "N04",
+      "name": "通道",
+      "modern": "湖南省通道侗族自治县",
+      "army": "central-red-army",
+      "role": "通道会议",
+      "date": "1934-12-12",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N05",
+      "name": "黎平",
+      "modern": "贵州省黎平县",
+      "army": "central-red-army",
+      "role": "黎平会议，转兵黔北",
+      "date": "1934-12-18",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N06",
+      "name": "猴场",
+      "modern": "贵州省瓮安县猴场",
+      "army": "central-red-army",
+      "role": "猴场会议",
+      "date": "1935-01-01",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N07",
+      "name": "遵义",
+      "modern": "贵州省遵义市",
+      "army": "central-red-army",
+      "role": "遵义会议；二渡赤水后再占",
+      "date": "1935-01",
+      "sources": [
+        "S05",
+        "S16"
+      ]
+    },
+    {
+      "id": "N08",
+      "name": "土城/赤水河",
+      "modern": "贵州省习水县土城一带及赤水河沿岸",
+      "army": "central-red-army",
+      "role": "一渡赤水等，四渡赤水示意区，不可画成精确折线",
+      "date": "1935-01/03",
+      "sources": [
+        "S16",
+        "S06"
+      ]
+    },
+    {
+      "id": "N09",
+      "name": "扎西",
+      "modern": "云南省威信县（扎西）",
+      "army": "central-red-army",
+      "role": "缩编与回师决策",
+      "date": "1935-02",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N10",
+      "name": "娄山关",
+      "modern": "贵州省桐梓至遵义之间娄山关",
+      "army": "central-red-army",
+      "role": "二渡赤水后攻占",
+      "date": "1935-02",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "id": "N11",
+      "name": "皎平渡",
+      "modern": "云南省昆明市禄劝彝族苗族自治县皎平渡",
+      "army": "central-red-army",
+      "role": "巧渡金沙江主要渡口之一",
+      "date": "1935-05-03/09",
+      "sources": [
+        "S21"
+      ]
+    },
+    {
+      "id": "N12",
+      "name": "会理",
+      "modern": "四川省会理市",
+      "army": "central-red-army",
+      "role": "会理会议",
+      "date": "1935-05-12",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N13",
+      "name": "彝海/冕宁",
+      "modern": "四川省冕宁县彝海",
+      "army": "central-red-army",
+      "role": "彝海结盟",
+      "date": "1935-05-22",
+      "sources": [
+        "S09"
+      ]
+    },
+    {
+      "id": "N14",
+      "name": "安顺场",
+      "modern": "四川省石棉县安顺场",
+      "army": "central-red-army",
+      "role": "强渡大渡河",
+      "date": "1935-05-24/25",
+      "sources": [
+        "S06"
+      ]
+    },
+    {
+      "id": "N15",
+      "name": "泸定桥",
+      "modern": "四川省泸定县",
+      "army": "central-red-army",
+      "role": "飞夺泸定桥",
+      "date": "1935-05-29",
+      "sources": [
+        "S06",
+        "S09"
+      ]
+    },
+    {
+      "id": "N16",
+      "name": "夹金山",
+      "modern": "四川省宝兴县、小金县一带",
+      "army": "central-red-army",
+      "role": "中央红军翻越的第一座大雪山",
+      "date": "1935-06",
+      "sources": [
+        "S09"
+      ]
+    },
+    {
+      "id": "N17",
+      "name": "懋功/达维",
+      "modern": "四川省小金县（达维镇）",
+      "army": "central-red-army",
+      "role": "与红四方面军会师",
+      "date": "1935-06",
+      "sources": [
+        "S07"
+      ]
+    },
+    {
+      "id": "N18",
+      "name": "两河口、沙窝、毛儿盖",
+      "modern": "四川省阿坝州相关地点",
+      "army": "central-red-army",
+      "role": "北上方针系列会议与过草地出发点",
+      "date": "1935-06/08",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N19",
+      "name": "包座",
+      "modern": "四川省若尔盖县包座一带",
+      "army": "central-red-army",
+      "role": "包座战斗",
+      "date": "1935-08-29/31",
+      "sources": [
+        "S06"
+      ]
+    },
+    {
+      "id": "N20",
+      "name": "俄界",
+      "modern": "甘肃省迭部县达拉乡高吉村",
+      "army": "central-red-army",
+      "role": "俄界会议",
+      "date": "1935-09-12",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N21",
+      "name": "腊子口",
+      "modern": "甘肃省迭部县腊子口",
+      "army": "central-red-army",
+      "role": "突破天险腊子口",
+      "date": "1935-09-17",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N22",
+      "name": "哈达铺",
+      "modern": "甘肃省宕昌县哈达铺",
+      "army": "central-red-army",
+      "role": "获悉陕北仍有根据地，整编陕甘支队",
+      "date": "1935-09",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N23",
+      "name": "榜罗镇",
+      "modern": "甘肃省通渭县榜罗镇",
+      "army": "central-red-army",
+      "role": "正式决定落脚陕北",
+      "date": "1935-09-27",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N24",
+      "name": "六盘山",
+      "modern": "宁夏、甘肃交界六盘山",
+      "army": "central-red-army",
+      "role": "北上途中重要山岭",
+      "date": "1935-10",
+      "sources": [
+        "S05",
+        "S18"
+      ]
+    },
+    {
+      "id": "N25",
+      "name": "吴起镇",
+      "modern": "陕西省吴起县",
+      "army": "central-red-army",
+      "role": "中央红军长征结束地",
+      "date": "1935-10-19",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "N26",
+      "name": "直罗镇",
+      "modern": "陕西省富县直罗镇",
+      "army": "central-red-army",
+      "role": "落脚后的奠基战役",
+      "date": "1935-11-21/26",
+      "sources": [
+        "S20"
+      ]
+    },
+    {
+      "id": "N27",
+      "name": "何家冲",
+      "modern": "河南省罗山县何家冲",
+      "army": "25th-army",
+      "role": "红二十五军出发地",
+      "date": "1934-11-16",
+      "sources": [
+        "S14"
+      ]
+    },
+    {
+      "id": "N28",
+      "name": "独树镇",
+      "modern": "河南省方城县独树镇",
+      "army": "25th-army",
+      "role": "独树镇战斗",
+      "date": "1934-11-26",
+      "sources": [
+        "S06",
+        "S14"
+      ]
+    },
+    {
+      "id": "N29",
+      "name": "永坪",
+      "modern": "陕西省延安市延川区永坪",
+      "army": "25th-army",
+      "role": "与陕甘红军会师并合编红十五军团",
+      "date": "1935-09-15/18",
+      "sources": [
+        "S14",
+        "S22"
+      ]
+    },
+    {
+      "id": "N30",
+      "name": "嘉陵江/苍溪一带",
+      "modern": "四川省苍溪县等",
+      "army": "fourth-front-army",
+      "role": "强渡嘉陵江，一说红四方面军长征实际起点",
+      "date": "1935-03",
+      "sources": [
+        "S02",
+        "S17"
+      ]
+    },
+    {
+      "id": "N31",
+      "name": "甘孜",
+      "modern": "四川省甘孜县",
+      "army": "second-front-army",
+      "role": "红二、六军团与红四方面军会师，组成红二方面军",
+      "date": "1936-07",
+      "sources": [
+        "S07"
+      ]
+    },
+    {
+      "id": "N32",
+      "name": "桑植刘家坪",
+      "modern": "湖南省桑植县刘家坪",
+      "army": "second-front-army",
+      "role": "红二、六军团出发地",
+      "date": "1935-11-19",
+      "sources": [
+        "S03",
+        "S17"
+      ]
+    },
+    {
+      "id": "N33",
+      "name": "乌蒙山区",
+      "modern": "滇黔川交界乌蒙山区",
+      "army": "second-front-army",
+      "role": "乌蒙山回旋战示意区",
+      "date": "1936-02/03",
+      "sources": [
+        "S06"
+      ]
+    },
+    {
+      "id": "N34",
+      "name": "会宁",
+      "modern": "甘肃省会宁县",
+      "army": "fourth-front-army",
+      "role": "红一、红四方面军会师",
+      "date": "1936-10-09",
+      "sources": [
+        "S07"
+      ]
+    },
+    {
+      "id": "N35",
+      "name": "将台堡",
+      "modern": "宁夏回族自治区西吉县将台堡（历史叙述常作甘肃静宁以北或甘肃隆德）",
+      "army": "second-front-army",
+      "role": "红一、红二方面军会师，长征结束标志地之一",
+      "date": "1936-10-22",
+      "sources": [
+        "S03",
+        "S07",
+        "S17"
+      ]
+    }
+  ]
+}

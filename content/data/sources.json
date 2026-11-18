@@ -1,0 +1,508 @@
+{
+  "schema_version": "1.0",
+  "accessed_on": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "items": [
+    {
+      "id": "S01",
+      "title": "长征·光辉历程",
+      "authors": [],
+      "publisher": "中央党史和文献研究院官网",
+      "original_publication": "人民日报",
+      "pub_date": "2016-09-30",
+      "url": "https://www.dswxyjy.org.cn/n1/2016/0930/c396983-28753123.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文",
+      "type": "party_history_institute_reprint",
+      "reliability": "authoritative",
+      "use_for": [
+        "overview",
+        "anti_japanese_context"
+      ]
+    },
+    {
+      "id": "S02",
+      "title": "要全面地认识长征史",
+      "authors": [
+        "石仲泉"
+      ],
+      "publisher": "中央党史和文献研究院官网",
+      "original_publication": "北京日报",
+      "pub_date": "2016-09-06",
+      "url": "https://www.dswxyjy.org.cn/n1/2016/0906/c396983-28695103.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文。作者为中央党史研究室原副主任，属权威专家论述。",
+      "type": "party_historian_essay",
+      "reliability": "authoritative_expert",
+      "use_for": [
+        "concept_3plus1",
+        "mileage",
+        "departure_places",
+        "destination_dynamic",
+        "historiography"
+      ]
+    },
+    {
+      "id": "S03",
+      "title": "长征的里程",
+      "authors": [
+        "李涛"
+      ],
+      "author_affiliation": "军事科学院军事历史和百科研究部副研究员",
+      "publisher": "新华网",
+      "original_publication": "光明日报",
+      "pub_date": "2016-10-10",
+      "url": "https://www.xinhuanet.com/politics/2016-10/10/c_129315351.htm",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文",
+      "type": "military_history_feature",
+      "reliability": "authoritative",
+      "use_for": [
+        "mileage",
+        "army_sketches",
+        "dates"
+      ]
+    },
+    {
+      "id": "S04",
+      "title": "长征缘起：反“围剿”失利陷险境 战略转移图生存",
+      "authors": [
+        "梁星亮"
+      ],
+      "publisher": "人民网党史频道",
+      "original_publication": "陕西日报",
+      "pub_date": "2016-08-01",
+      "url": "https://dangshi.people.com.cn/n1/2016/0801/c85037-28601545.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读全文；本环境对 dangshi.people.com.cn 命令行探测握手失败，非404。建议上线前再测 HTTPS。",
+      "type": "party_history_feature",
+      "reliability": "authoritative_media",
+      "use_for": [
+        "background",
+        "departure_headcount_87059",
+        "xiangjiang",
+        "rear_guard"
+      ]
+    },
+    {
+      "id": "S05",
+      "title": "长征途中中共中央召开过哪些重要会议？",
+      "authors": [
+        "毛胜"
+      ],
+      "author_affiliation": "中央党史和文献研究院第七研究部副主任、研究员",
+      "publisher": "人民网党史学习教育官方网站",
+      "original_publication": "学习时报",
+      "pub_date": "2021-11-29",
+      "url": "https://dangshi.people.com.cn/n1/2021/1129/c436975-32294130.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读全文；命令行探测握手失败，非404。",
+      "type": "party_history_institute_essay",
+      "reliability": "authoritative",
+      "use_for": [
+        "meetings"
+      ]
+    },
+    {
+      "id": "S06",
+      "title": "长征中有哪些重要战役战斗",
+      "authors": [
+        "徐飞",
+        "杨茹",
+        "娄思佳"
+      ],
+      "publisher": "新华社/新华网",
+      "original_publication": "新华社",
+      "pub_date": "2016-09-24",
+      "url": "https://www.xinhuanet.com/politics/2016-09/24/c_1119616618.htm",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文",
+      "type": "xinhua_feature",
+      "reliability": "authoritative",
+      "use_for": [
+        "battles"
+      ]
+    },
+    {
+      "id": "S07",
+      "title": "解码长征丨长征中的６次会师",
+      "authors": [
+        "闫茁草",
+        "蔡琳琳",
+        "李悦"
+      ],
+      "publisher": "新华社/新华网",
+      "original_publication": "新华社",
+      "pub_date": "2016-10-11",
+      "url": "https://www.xinhuanet.com/mil/2016-10/11/c_129318129.htm",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文。永坪会师日期作9月16日，须与S14、S22对照。",
+      "type": "xinhua_feature",
+      "reliability": "authoritative",
+      "use_for": [
+        "rendezvous"
+      ]
+    },
+    {
+      "id": "S08",
+      "title": "遵义会议：翻开了新的一页",
+      "authors": [
+        "杨明伟"
+      ],
+      "author_affiliation": "中央党史和文献研究院研究员",
+      "publisher": "中央党史和文献研究院官网",
+      "original_publication": "中央党史和文献研究院",
+      "pub_date": "2025-01-21",
+      "url": "https://www.dswxyjy.org.cn/n1/2025/0121/c219021-40406191.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文",
+      "type": "party_history_institute_essay",
+      "reliability": "authoritative",
+      "use_for": [
+        "zunyi",
+        "meetings"
+      ]
+    },
+    {
+      "id": "S09",
+      "title": "四川：彝海结盟过凉山 勇士飞夺泸定桥",
+      "authors": [
+        "梁文悦",
+        "蒲学光"
+      ],
+      "publisher": "人民网党史频道",
+      "original_publication": "贵州日报",
+      "pub_date": "2016-10-10",
+      "url": "https://dangshi.people.com.cn/n1/2016/1010/c85037-28766291.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读全文；命令行探测握手失败，非404。属党报采访，细节丰富但个别减员数字为采访综合，须标明出处。",
+      "type": "party_media_feature",
+      "reliability": "reliable_feature",
+      "use_for": [
+        "yi_alliance",
+        "luding",
+        "snow_mountains",
+        "grassland"
+      ]
+    },
+    {
+      "id": "S10",
+      "title": "筹粮资、当向导、参加红军——藏族人民为长征胜利作出重要贡献",
+      "authors": [
+        "张京品",
+        "吴光于",
+        "白少波"
+      ],
+      "publisher": "新华社/新华网",
+      "original_publication": "新华社",
+      "pub_date": "2016-10-14",
+      "url": "https://www.xinhuanet.com/mil/2016-10/14/c_129322888.htm",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文。文中部分粮畜数字转引地方文史，展示时须标明转引层级。",
+      "type": "xinhua_feature",
+      "reliability": "authoritative",
+      "use_for": [
+        "ethnic_policy",
+        "logistics",
+        "civilians"
+      ]
+    },
+    {
+      "id": "S11",
+      "title": "中央红军长征的决策和部署",
+      "authors": [
+        "钟燕林",
+        "黄云",
+        "苏春生"
+      ],
+      "publisher": "中国共产党新闻网",
+      "original_publication": "百年潮 2024年第5期",
+      "pub_date": "2024-06-27",
+      "url": "https://cpc.people.com.cn/n1/2024/0627/c443712-40265314.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200。抓取时正文中段有节略，仅使用已核读首尾。",
+      "type": "historical_journal",
+      "reliability": "authoritative",
+      "use_for": [
+        "decision_to_leave",
+        "overview_stats",
+        "rear_guard"
+      ]
+    },
+    {
+      "id": "S12",
+      "title": "国博展讯｜“英名永存 薪火长歌——纪念中国工农红军长征胜利90周年文物联展”对公众展出",
+      "authors": [],
+      "publisher": "中国国家博物馆",
+      "original_publication": "中国国家博物馆官网",
+      "pub_date": "2026-11-02",
+      "url": "https://www.chnmuseum.cn/zx/gbxw/202611/t20261102_283293.shtml",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文。不引用展品图像版权。",
+      "type": "national_museum",
+      "reliability": "authoritative",
+      "use_for": [
+        "official_overview",
+        "spirit",
+        "exhibition"
+      ]
+    },
+    {
+      "id": "S13",
+      "title": "受权发布丨习近平：在纪念中国工农红军长征胜利90周年大会上的讲话",
+      "authors": [
+        "习近平"
+      ],
+      "publisher": "新华社受权发布/新华网",
+      "original_publication": "新华社",
+      "pub_date": "2026-10-22",
+      "url": "https://www.news.cn/politics/leaders/20261022/8771efbecd384ffba61dc44720e065d1/c.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文。为2026年中央权威表述。",
+      "type": "central_speech",
+      "reliability": "highest_official",
+      "use_for": [
+        "spirit",
+        "historical_significance",
+        "zunyi_evaluation",
+        "people"
+      ]
+    },
+    {
+      "id": "S14",
+      "title": "红二十五军：自豫入陕长征路（军史钩沉·长征记忆）",
+      "authors": [
+        "王晓建",
+        "杜杰"
+      ],
+      "publisher": "人民网",
+      "original_publication": "人民日报 2016年10月9日06版",
+      "pub_date": "2016-10-09",
+      "url": "https://military.people.com.cn/n1/2016/1009/c1011-28760970.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读全文；命令行探测握手失败，非404。",
+      "type": "peoples_daily",
+      "reliability": "authoritative",
+      "use_for": [
+        "25th_army"
+      ]
+    },
+    {
+      "id": "S15",
+      "title": "两大长征主题展览在中国共产党历史展览馆开幕",
+      "authors": [
+        "胡了然"
+      ],
+      "publisher": "新华社/新华网",
+      "original_publication": "新华社",
+      "pub_date": "2026-09-29",
+      "url": "https://www.news.cn/politics/20260929/57c653e95f024d0d8e2fbe57c47f77e8/c.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文。可证明中央档案馆举办档案展，未逐件核读展出原档。",
+      "type": "xinhua_news",
+      "reliability": "authoritative",
+      "use_for": [
+        "archives_exhibition"
+      ]
+    },
+    {
+      "id": "S16",
+      "title": "解读长征（25）：中央红军是怎样四渡赤水河的",
+      "authors": [
+        "姜廷玉"
+      ],
+      "author_affiliation": "中国人民革命军事博物馆研究员",
+      "publisher": "人民网党史频道",
+      "original_publication": "央广军事",
+      "pub_date": "2016-09-14",
+      "url": "https://dangshi.people.com.cn/n1/2016/0914/c85037-28714306.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读一渡、二渡及再占遵义部分，其后文本截断。",
+      "type": "military_museum_expert",
+      "reliability": "authoritative",
+      "use_for": [
+        "four_crossings_chishui"
+      ]
+    },
+    {
+      "id": "S17",
+      "title": "解读长征(4)：各路红军长征经历怎样的历史过程?",
+      "authors": [
+        "姜廷玉"
+      ],
+      "publisher": "人民网党史频道",
+      "original_publication": "央广军事",
+      "pub_date": "2016-09-01",
+      "url": "https://dangshi.people.com.cn/n1/2016/0901/c85037-28683887.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读全文。明确并列红四方面军起点的3月说与5月说。",
+      "type": "military_museum_expert",
+      "reliability": "authoritative",
+      "use_for": [
+        "four_armies_process",
+        "fourth_front_start_dispute"
+      ]
+    },
+    {
+      "id": "S18",
+      "title": "漫漫长征路究竟有多长",
+      "authors": [],
+      "publisher": "央视网",
+      "original_publication": "光明日报",
+      "pub_date": "2016-10-13",
+      "url": "https://news.cctv.com/2016/10/13/ARTIwECwHwcSzbYkhGCFr3ZF161013.shtml",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文",
+      "type": "official_media_feature",
+      "reliability": "authoritative",
+      "use_for": [
+        "mileage",
+        "historiography",
+        "second_front_provinces"
+      ]
+    },
+    {
+      "id": "S19",
+      "title": "渡口出发的长征",
+      "authors": [
+        "刘菁",
+        "高皓亮",
+        "赖星"
+      ],
+      "publisher": "人民网军事频道",
+      "original_publication": "新华社",
+      "pub_date": "2016-09-26",
+      "url": "https://military.people.com.cn/n1/2016/0926/c1011-28741249.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读全文；命令行探测握手失败，非404。",
+      "type": "xinhua_feature",
+      "reliability": "authoritative",
+      "use_for": [
+        "yudu_crossing",
+        "civilians"
+      ]
+    },
+    {
+      "id": "S20",
+      "title": "党中央在西北建立革命根据地的奠基礼",
+      "authors": [
+        "冯俊刚"
+      ],
+      "publisher": "人民网党史学习教育官方网站",
+      "original_publication": "学习时报",
+      "pub_date": "2022-01-17",
+      "url": "https://dangshi.people.com.cn/n1/2022/0117/c436975-32332657.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读全文；命令行探测握手失败，非404。",
+      "type": "party_history_feature",
+      "reliability": "authoritative",
+      "use_for": [
+        "zhiluo",
+        "northwest_base"
+      ]
+    },
+    {
+      "id": "S21",
+      "title": "长征·光辉历程：巧渡金沙江（1935年5月3日至9日）",
+      "authors": [],
+      "publisher": "中国共产党新闻网党史频道",
+      "original_publication": "人民日报 2016年10月11日09版",
+      "pub_date": "2016-10-11",
+      "url": "https://dangshi.people.com.cn/n1/2016/1011/c85037-28767063.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读全文；命令行探测握手失败，非404。",
+      "type": "peoples_daily",
+      "reliability": "authoritative",
+      "use_for": [
+        "jinsha_river"
+      ]
+    },
+    {
+      "id": "S22",
+      "title": "解码长征丨红军长征途经多少省",
+      "authors": [
+        "郜耿豪",
+        "孙杰",
+        "遇际坤"
+      ],
+      "publisher": "新华社/新华网",
+      "original_publication": "新华社",
+      "pub_date": "2016-09-26",
+      "url": "https://www.xinhuanet.com/mil/2016-09/26/c_129299885.htm",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200，已读全文。红二方面军9省、红四方面军3月初出发等口径须与其他源并列。",
+      "type": "xinhua_feature",
+      "reliability": "authoritative",
+      "use_for": [
+        "provinces",
+        "army_sketches",
+        "25th_army_dates"
+      ]
+    },
+    {
+      "id": "X01",
+      "title": "慷慨赴远征 浴血破重围",
+      "authors": [
+        "徐文耀",
+        "刘佳闻"
+      ],
+      "publisher": "中国共产党新闻网",
+      "original_publication": "解放军报",
+      "pub_date": "2026-10-08",
+      "url": "https://cpc.people.com.cn/n1/2026/1008/c443712-40810445.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "200",
+      "access_note": "HTTPS 复核 200。中后段抓取节略，仅用已核读的出发与独树镇部分。",
+      "type": "pla_daily",
+      "reliability": "authoritative_partial",
+      "use_for": [
+        "dushuzhen",
+        "25th_army"
+      ],
+      "supplementary": true
+    },
+    {
+      "id": "X02",
+      "title": "第十三章　强渡嘉陵江，红四方面军开始长征",
+      "authors": [
+        "曲爱国",
+        "张从田"
+      ],
+      "publisher": "人民网党史频道",
+      "original_publication": "人民网-中国共产党新闻网（长征记专题）",
+      "pub_date": "2016-08-18",
+      "url": "https://dangshi.people.com.cn/n1/2016/0818/c406330-28647251.html",
+      "accessed": "2026-11-18",
+      "http_check_2026_11_18": "webfetch_ok_curl_handshake_fail",
+      "access_note": "研究抓取已读前半；后段未完整核读，不用未读战果数字。",
+      "type": "book_chapter_online",
+      "reliability": "authoritative_partial",
+      "use_for": [
+        "fourth_front_background"
+      ],
+      "supplementary": true
+    }
+  ]
+}

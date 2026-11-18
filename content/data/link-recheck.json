@@ -1,0 +1,146 @@
+[
+  {
+    "id": "S01",
+    "url": "https://www.dswxyjy.org.cn/n1/2016/0930/c396983-28753123.html",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S02",
+    "url": "https://www.dswxyjy.org.cn/n1/2016/0906/c396983-28695103.html",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S03",
+    "url": "https://www.xinhuanet.com/politics/2016-10/10/c_129315351.htm",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S04",
+    "url": "https://dangshi.people.com.cn/n1/2016/0801/c85037-28601545.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'dangshi.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and there"
+  },
+  {
+    "id": "S05",
+    "url": "https://dangshi.people.com.cn/n1/2021/1129/c436975-32294130.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'dangshi.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and there"
+  },
+  {
+    "id": "S06",
+    "url": "https://www.xinhuanet.com/politics/2016-09/24/c_1119616618.htm",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S07",
+    "url": "https://www.xinhuanet.com/mil/2016-10/11/c_129318129.htm",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S08",
+    "url": "https://www.dswxyjy.org.cn/n1/2025/0121/c219021-40406191.html",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S09",
+    "url": "https://dangshi.people.com.cn/n1/2016/1010/c85037-28766291.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'dangshi.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and there"
+  },
+  {
+    "id": "S10",
+    "url": "https://www.xinhuanet.com/mil/2016-10/14/c_129322888.htm",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S11",
+    "url": "https://cpc.people.com.cn/n1/2024/0627/c443712-40265314.html",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S12",
+    "url": "https://www.chnmuseum.cn/zx/gbxw/202611/t20261102_283293.shtml",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S13",
+    "url": "https://www.news.cn/politics/leaders/20261022/8771efbecd384ffba61dc44720e065d1/c.html",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S14",
+    "url": "https://military.people.com.cn/n1/2016/1009/c1011-28760970.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'military.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and ther"
+  },
+  {
+    "id": "S15",
+    "url": "https://www.news.cn/politics/20260929/57c653e95f024d0d8e2fbe57c47f77e8/c.html",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S16",
+    "url": "https://dangshi.people.com.cn/n1/2016/0914/c85037-28714306.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'dangshi.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and there"
+  },
+  {
+    "id": "S17",
+    "url": "https://dangshi.people.com.cn/n1/2016/0901/c85037-28683887.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'dangshi.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and there"
+  },
+  {
+    "id": "S18",
+    "url": "https://news.cctv.com/2016/10/13/ARTIwECwHwcSzbYkhGCFr3ZF161013.shtml",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "S19",
+    "url": "https://military.people.com.cn/n1/2016/0926/c1011-28741249.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'military.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and ther"
+  },
+  {
+    "id": "S20",
+    "url": "https://dangshi.people.com.cn/n1/2022/0117/c436975-32332657.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'dangshi.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and there"
+  },
+  {
+    "id": "S21",
+    "url": "https://dangshi.people.com.cn/n1/2016/1011/c85037-28767063.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'dangshi.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and there"
+  },
+  {
+    "id": "S22",
+    "url": "https://www.xinhuanet.com/mil/2016-09/26/c_129299885.htm",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "X01",
+    "url": "https://cpc.people.com.cn/n1/2026/1008/c443712-40810445.html",
+    "code": "200",
+    "err": ""
+  },
+  {
+    "id": "X02",
+    "url": "https://dangshi.people.com.cn/n1/2016/0818/c406330-28647251.html",
+    "code": "000",
+    "err": "curl: (60) SSL: no alternative certificate subject name matches target host name 'dangshi.people.com.cn' More details here: https://curl.se/docs/sslcerts.html  curl failed to verify the legitimacy of the server and there"
+  }
+]

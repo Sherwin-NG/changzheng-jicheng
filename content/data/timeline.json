@@ -1,0 +1,612 @@
+{
+  "schema_version": "1.0",
+  "map_disclaimer": "时间线中的地点均为历史事件发生地或示意节点，不能连成精确行军轨迹。",
+  "count": 37,
+  "items": [
+    {
+      "id": "T01",
+      "date": "1934-04/06",
+      "date_label": "1934年4月至6月",
+      "title": "广昌失守后酝酿战略转移并成立“三人团”",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "decision",
+      "place": "中央苏区瑞金",
+      "summary": "第五次反“围剿”陷入困境，中央准备撤离并报告共产国际，成立由博古、李德、周恩来组成的最高“三人团”。",
+      "sources": [
+        "S04",
+        "S11"
+      ]
+    },
+    {
+      "id": "T02",
+      "date": "1934-08-07",
+      "date_label": "1934年8月7日",
+      "title": "红六军团开始西征",
+      "army": [
+        "second-front-army"
+      ],
+      "type": "prelude",
+      "place": "湘赣苏区",
+      "summary": "为中央红军战略转移探路并发展游击战争。一般不作为整个长征的历史起点。",
+      "sources": [
+        "S07",
+        "S02"
+      ]
+    },
+    {
+      "id": "T03",
+      "date": "1934-10-10",
+      "date_label": "1934年10月10日",
+      "title": "中共中央、中革军委由瑞金出发",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "departure_marker",
+      "place": "江西瑞金",
+      "summary": "最常用的中央红军乃至整个长征开始的标志性日期。机关向于都集结开进，不等于当日全部主力已经渡河。",
+      "sources": [
+        "S03",
+        "S11",
+        "S19",
+        "S22"
+      ],
+      "do_not_confuse_with": [
+        "T04"
+      ]
+    },
+    {
+      "id": "T04",
+      "date": "1934-10-16/20",
+      "date_label": "1934年10月16日至20日前后",
+      "title": "中央红军于都集结并渡过于都河",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "departure_crossing",
+      "place": "江西于都河诸渡口",
+      "summary": "16日在于都河以北集结完毕，17日起8.6万余人开始渡河，于都因此有“长征第一渡”之称。",
+      "sources": [
+        "S19"
+      ],
+      "do_not_confuse_with": [
+        "T03"
+      ]
+    },
+    {
+      "id": "T05",
+      "date": "1934-10-24",
+      "date_label": "1934年10月24日",
+      "title": "红六军团与红三军木黄会师",
+      "army": [
+        "second-front-army"
+      ],
+      "type": "rendezvous",
+      "place": "贵州印江县木黄",
+      "summary": "红三军恢复红二军团番号，其后共同行动并创建湘鄂川黔根据地，策应中央红军。",
+      "sources": [
+        "S07"
+      ]
+    },
+    {
+      "id": "T06",
+      "date": "1934-11-16",
+      "date_label": "1934年11月16日",
+      "title": "红二十五军由何家冲出发",
+      "army": [
+        "25th-army"
+      ],
+      "type": "departure_marker",
+      "place": "河南罗山县何家冲",
+      "summary": "以北上抗日第二先遣队名义出发，约2980人或2900余人。",
+      "sources": [
+        "S14",
+        "S22"
+      ]
+    },
+    {
+      "id": "T07",
+      "date": "1934-11-25/12-01",
+      "date_label": "1934年11月25日至12月1日",
+      "title": "湘江战役",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "battle",
+      "place": "湖南道县、广西全州湘江两岸",
+      "summary": "突破第四道封锁线，中央红军由约8.6万人减至约3万人，损失极为惨重。",
+      "sources": [
+        "S04",
+        "S06"
+      ]
+    },
+    {
+      "id": "T08",
+      "date": "1934-11-26",
+      "date_label": "1934年11月26日",
+      "title": "独树镇战斗",
+      "army": [
+        "25th-army"
+      ],
+      "type": "battle",
+      "place": "河南方城县独树镇一带",
+      "summary": "红二十五军在极端不利条件下血战突围，进入伏牛山。",
+      "sources": [
+        "S06",
+        "S14",
+        "X01"
+      ]
+    },
+    {
+      "id": "T09",
+      "date": "1934-12-12",
+      "date_label": "1934年12月12日",
+      "title": "通道会议",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "meeting",
+      "place": "湖南通道",
+      "summary": "讨论进军方向。毛泽东主张改向贵州，多数人赞成，博古、李德拒不接受，会议未最终决定大方向，但部署西进黎平。",
+      "sources": [
+        "S05",
+        "S08"
+      ]
+    },
+    {
+      "id": "T10",
+      "date": "1934-12-18",
+      "date_label": "1934年12月18日",
+      "title": "黎平会议",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "meeting",
+      "place": "贵州黎平",
+      "summary": "通过战略方针决定，放弃到湘西会合的计划，改以遵义为中心的川黔边为新根据地区。",
+      "sources": [
+        "S05",
+        "S08"
+      ]
+    },
+    {
+      "id": "T11",
+      "date": "1935-01-01",
+      "date_label": "1934年12月31日晚至1935年1月1日",
+      "title": "猴场会议",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "meeting",
+      "place": "贵州瓮安县猴场",
+      "summary": "重申在川黔边建立根据地，并规定军委须向政治局报告作战方针及作战时间地点的选择。",
+      "sources": [
+        "S05",
+        "S08"
+      ]
+    },
+    {
+      "id": "T12",
+      "date": "1935-01-07",
+      "date_label": "1935年1月7日",
+      "title": "红军攻占遵义",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "event",
+      "place": "贵州遵义",
+      "summary": "为召开遵义会议提供了条件。",
+      "sources": [
+        "S05",
+        "S08"
+      ]
+    },
+    {
+      "id": "T13",
+      "date": "1935-01-15/17",
+      "date_label": "1935年1月15日至17日",
+      "title": "遵义会议",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "meeting",
+      "place": "贵州遵义",
+      "summary": "集中解决军事和组织问题，事实上确立毛泽东在党中央和红军的领导地位，是党的历史上生死攸关的转折点。",
+      "sources": [
+        "S05",
+        "S08",
+        "S13"
+      ]
+    },
+    {
+      "id": "T14",
+      "date": "1935-01-29",
+      "date_label": "1935年1月29日",
+      "title": "一渡赤水",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "battle",
+      "place": "土城一带赤水河",
+      "summary": "土城战斗不利后西渡赤水，开始高度机动的转战。",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "id": "T15",
+      "date": "1935-02-05",
+      "date_label": "1935年2月5日",
+      "title": "鸡鸣三省常委分工，张闻天负总责",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "meeting",
+      "place": "川滇黔交界“鸡鸣三省”一带",
+      "summary": "由张闻天代替博古负中央总的责任，毛泽东为周恩来在军事指挥上的帮助者。",
+      "sources": [
+        "S05",
+        "S08"
+      ]
+    },
+    {
+      "id": "T16",
+      "date": "1935-02-18/19",
+      "date_label": "1935年2月18日、19日",
+      "title": "二渡赤水并再占遵义",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "battle",
+      "place": "太平渡、二郎滩至娄山关、遵义",
+      "summary": "回师东进，再占娄山关和遵义，取得长征以来较大胜利。",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "id": "T17",
+      "date": "1935-03",
+      "date_label": "1935年3月（中下旬）",
+      "title": "三渡、四渡赤水，随后南渡乌江、佯攻贵阳",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "battle",
+      "place": "茅台及赤水河沿岸至黔中",
+      "summary": "四渡赤水战役历时三个多月。三、四渡具体日时在通行表述中多作3月中下旬，因部分专文未完整核读到段末，节点不作过细时刻表。",
+      "sources": [
+        "S06",
+        "S16",
+        "S21"
+      ],
+      "precision": "month_to_mid_late_month"
+    },
+    {
+      "id": "T18",
+      "date": "1935-03-late",
+      "date_label": "1935年3月下旬",
+      "title": "红四方面军强渡嘉陵江（一说由此实际开始长征）",
+      "army": [
+        "fourth-front-army"
+      ],
+      "type": "battle_and_possible_departure",
+      "place": "四川苍溪等嘉陵江沿岸",
+      "summary": "为向川甘边发展并配合中央红军。红四方面军长征起点存在3月说与5月说，必须并列。",
+      "sources": [
+        "S17",
+        "S22",
+        "X02"
+      ]
+    },
+    {
+      "id": "T19",
+      "date": "1935-05-early",
+      "date_label": "1935年5月初",
+      "title": "红四方面军撤离川陕向西（另一说以此为长征起点）",
+      "army": [
+        "fourth-front-army"
+      ],
+      "type": "possible_departure",
+      "place": "彰明、中坝、青川、平武等地",
+      "summary": "与3月嘉陵江战役起点说并存。",
+      "sources": [
+        "S03",
+        "S17"
+      ]
+    },
+    {
+      "id": "T20",
+      "date": "1935-05-03/09",
+      "date_label": "1935年5月3日至9日",
+      "title": "巧渡金沙江",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "battle",
+      "place": "云南禄劝皎平渡等地",
+      "summary": "中央红军主力渡过金沙江，取得战略转移中具有决定意义的胜利。",
+      "sources": [
+        "S21"
+      ]
+    },
+    {
+      "id": "T21",
+      "date": "1935-05-22",
+      "date_label": "1935年5月22日",
+      "title": "彝海结盟",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "event",
+      "place": "四川冕宁彝海",
+      "summary": "刘伯承与彝族首领小叶丹歃血结盟，红军借道凉山北上。",
+      "sources": [
+        "S09"
+      ]
+    },
+    {
+      "id": "T22",
+      "date": "1935-05-24/29",
+      "date_label": "1935年5月24日至29日",
+      "title": "强渡大渡河与飞夺泸定桥",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "battle",
+      "place": "安顺场、泸定桥",
+      "summary": "25日十七勇士在安顺场强渡，29日突击队飞夺泸定桥。",
+      "sources": [
+        "S06",
+        "S09"
+      ]
+    },
+    {
+      "id": "T23",
+      "date": "1935-06-12/mid",
+      "date_label": "1935年6月12日（中旬会师）",
+      "title": "懋功会师",
+      "army": [
+        "central-red-army",
+        "fourth-front-army"
+      ],
+      "type": "rendezvous",
+      "place": "四川懋功（今小金）及达维一带",
+      "summary": "中央红军翻越夹金山后与红四方面军会师。",
+      "sources": [
+        "S07",
+        "S17"
+      ]
+    },
+    {
+      "id": "T24",
+      "date": "1935-06-26",
+      "date_label": "1935年6月26日",
+      "title": "两河口会议",
+      "army": [
+        "central-red-army",
+        "fourth-front-army"
+      ],
+      "type": "meeting",
+      "place": "两河口",
+      "summary": "决定北上，创造川陕甘根据地。张国焘会上同意，会后拖延反对。",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "T25",
+      "date": "1935-08-04/20",
+      "date_label": "1935年8月4日至20日",
+      "title": "沙窝会议与毛儿盖会议，随后右路军过草地",
+      "army": [
+        "central-red-army",
+        "fourth-front-army"
+      ],
+      "type": "meeting",
+      "place": "沙窝、毛儿盖及草地",
+      "summary": "重申北上，强调团结和向陕甘边界发展。",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "T26",
+      "date": "1935-08-29/31",
+      "date_label": "1935年8月29日至31日",
+      "title": "包座战斗",
+      "army": [
+        "central-red-army",
+        "fourth-front-army"
+      ],
+      "type": "battle",
+      "place": "包座",
+      "summary": "右路军攻占包座，打开北上甘南门户。",
+      "sources": [
+        "S06"
+      ]
+    },
+    {
+      "id": "T27",
+      "date": "1935-09-09/12",
+      "date_label": "1935年9月9日至12日",
+      "title": "中央先行北上与俄界会议",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "meeting",
+      "place": "甘肃迭部俄界（今高吉）",
+      "summary": "张国焘电令南下后，中央率红一、红三军和军委纵队北上，并通过关于张国焘错误的决定。",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "T28",
+      "date": "1935-09-15/18",
+      "date_label": "1935年9月15日至18日",
+      "title": "红二十五军到达永坪并合编为红十五军团",
+      "army": [
+        "25th-army"
+      ],
+      "type": "rendezvous",
+      "place": "陕西延川永坪",
+      "summary": "15日抵达，16日会师（一说会师日即16日），18日与红二十六、二十七军合编。",
+      "sources": [
+        "S14",
+        "S07",
+        "S22"
+      ]
+    },
+    {
+      "id": "T29",
+      "date": "1935-09-17/27",
+      "date_label": "1935年9月17日至27日",
+      "title": "突破腊子口，哈达铺整编，榜罗镇会议决定落脚陕北",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "meeting",
+      "place": "腊子口、哈达铺、榜罗镇",
+      "summary": "从报刊获悉陕北仍有根据地后，正式确定把落脚点放在陕北。",
+      "sources": [
+        "S05"
+      ]
+    },
+    {
+      "id": "T30",
+      "date": "1935-10-19/22",
+      "date_label": "1935年10月19日、22日",
+      "title": "到达吴起镇，中央红军长征结束",
+      "army": [
+        "central-red-army"
+      ],
+      "type": "arrival",
+      "place": "陕甘苏区吴起镇（今吴起）",
+      "summary": "19日抵达，21日进行吴起镇战斗，22日政治局会议宣告中央红军长征结束。三件事不可并成同一天。",
+      "sources": [
+        "S05",
+        "S06"
+      ]
+    },
+    {
+      "id": "T31",
+      "date": "1935-11-03",
+      "date_label": "1935年11月3日",
+      "title": "恢复红一方面军番号",
+      "army": [
+        "central-red-army",
+        "25th-army"
+      ],
+      "type": "organization",
+      "place": "下寺湾一带",
+      "summary": "陕甘支队与红十五军团会师后，彭德怀任司令员，毛泽东任政治委员。",
+      "sources": [
+        "S20"
+      ]
+    },
+    {
+      "id": "T32",
+      "date": "1935-11-21/26",
+      "date_label": "1935年11月21日至26日",
+      "title": "直罗镇战役",
+      "army": [
+        "central-red-army",
+        "25th-army"
+      ],
+      "type": "battle",
+      "place": "陕西鄜县（今富县）直罗镇",
+      "summary": "中央红军长征结束后的奠基之战，粉碎对陕甘苏区的第三次“围剿”。",
+      "sources": [
+        "S20"
+      ],
+      "after_central_army_long_march": true
+    },
+    {
+      "id": "T33",
+      "date": "1935-11-19",
+      "date_label": "1935年11月19日",
+      "title": "红二、红六军团由桑植出发",
+      "army": [
+        "second-front-army"
+      ],
+      "type": "departure_marker",
+      "place": "湖南桑植县刘家坪等地",
+      "summary": "退出湘鄂川黔根据地，开始本路长征。",
+      "sources": [
+        "S03",
+        "S07",
+        "S17"
+      ]
+    },
+    {
+      "id": "T34",
+      "date": "1936-02/03",
+      "date_label": "1936年2月至3月",
+      "title": "乌蒙山回旋战",
+      "army": [
+        "second-front-army"
+      ],
+      "type": "battle",
+      "place": "云贵高原乌蒙山区",
+      "summary": "红二、红六军团机动作战一个多月，摆脱重兵包围。",
+      "sources": [
+        "S06"
+      ]
+    },
+    {
+      "id": "T35",
+      "date": "1936-07-01/05",
+      "date_label": "1936年7月1日至5日",
+      "title": "甘孜会师并组成红二方面军",
+      "army": [
+        "second-front-army",
+        "fourth-front-army"
+      ],
+      "type": "rendezvous",
+      "place": "四川甘孜",
+      "summary": "会师后于7月5日组成红二方面军，随后与红四方面军共同北上。",
+      "sources": [
+        "S07",
+        "S17"
+      ]
+    },
+    {
+      "id": "T36",
+      "date": "1936-10-09",
+      "date_label": "1936年10月9日",
+      "title": "会宁会师",
+      "army": [
+        "central-red-army",
+        "fourth-front-army"
+      ],
+      "type": "rendezvous",
+      "place": "甘肃会宁",
+      "summary": "红四方面军与红一方面军会师。",
+      "sources": [
+        "S03",
+        "S07"
+      ]
+    },
+    {
+      "id": "T37",
+      "date": "1936-10-22",
+      "date_label": "1936年10月22日",
+      "title": "将台堡会师，长征胜利结束",
+      "army": [
+        "central-red-army",
+        "second-front-army"
+      ],
+      "type": "rendezvous_and_overall_end",
+      "place": "将台堡（当时叙述为甘肃静宁以北，今属宁夏西吉）",
+      "summary": "红二方面军与红一方面军会师，三大主力会师完成，标志着长征胜利结束。",
+      "sources": [
+        "S03",
+        "S07",
+        "S13",
+        "S17"
+      ]
+    }
+  ]
+}

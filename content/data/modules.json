@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "site_purpose": "精细、专业、可GitHub Pages部署的长征主题网站。本稿只提供内容与口径，不提供代码。",
+  "language": "zh-CN",
+  "recommended_ia": [
+    {
+      "id": "home",
+      "title": "总述",
+      "use": [
+        "01-research-main.md 第一节",
+        "data/armies.json overall",
+        "data/key-facts.json F01-F05,F08"
+      ]
+    },
+    {
+      "id": "four-armies",
+      "title": "四路红军",
+      "use": [
+        "data/armies.json items"
+      ]
+    },
+    {
+      "id": "timeline",
+      "title": "时间轴",
+      "use": [
+        "data/timeline.json"
+      ],
+      "ui_note": "提供整路/分路筛选；同一事件若有起讫分层，用副标题而不是合并日期"
+    },
+    {
+      "id": "meetings",
+      "title": "会议与转折",
+      "use": [
+        "data/meetings.json"
+      ],
+      "ui_note": "按转兵、遵义、巩固、北上、落脚五组呈现"
+    },
+    {
+      "id": "battles",
+      "title": "战役战斗",
+      "use": [
+        "data/battles-campaigns.json"
+      ],
+      "ui_note": "直罗镇放入落脚奠基，不要混入途中战役"
+    },
+    {
+      "id": "map",
+      "title": "路线节点示意",
+      "use": [
+        "data/route-nodes.json"
+      ],
+      "mandatory_caption": "本图为分路节点示意，不是精确行军轨迹。当年道路多已改线或消失，部队因作战、侦察、筹粮和往返机动，实际足迹远复杂于可连线的示意。"
+    },
+    {
+      "id": "people",
+      "title": "人物",
+      "use": [
+        "data/people.json"
+      ],
+      "ui_note": "缺名英雄群体不要补名；不使用未核授权照片"
+    },
+    {
+      "id": "people-and-land",
+      "title": "地理、后勤与民众",
+      "use": [
+        "01-research-main.md 第八节"
+      ]
+    },
+    {
+      "id": "historiography",
+      "title": "史料与口径说明",
+      "use": [
+        "01-research-main.md 第九节",
+        "data/key-facts.json"
+      ],
+      "ui_note": "必须单独成页，不能只放页脚"
+    },
+    {
+      "id": "spirit",
+      "title": "长征精神",
+      "use": [
+        "S13规范表述，见01-research-main.md 第十节"
+      ],
+      "do_not": "不要改写官方表述"
+    },
+    {
+      "id": "sources",
+      "title": "参考文献",
+      "use": [
+        "02-sources.md",
+        "data/sources.json"
+      ]
+    }
+  ],
+  "copy_rules": [
+    "每项重要事实保留源号，页面底部或侧栏可展开为完整书目",
+    "主数字用权威通行表述，并列口径放注释或“另一种说法”",
+    "外链用HTTPS，上线前再测一遍 dangshi.people.com.cn 存活",
+    "禁止杜撰引文、精确轨迹、未核照片版权和22勇士完整名单",
+    "英文如写25,000 li，必须注明华里及“最远部队”含义"
+  ]
+}
