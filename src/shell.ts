@@ -43,6 +43,16 @@ export function shell(page: PageId, main: string): string {
   </div>
   <p class="wrap">${esc(current.label)}</p>
 </footer>
+<dialog id="map-reader" aria-labelledby="map-reader-title">
+  <div class="map-reader-bar">
+    <h2 id="map-reader-title">放大读图</h2>
+    <button type="button" class="map-zoom-in">放大</button>
+    <button type="button" class="map-zoom-out">缩小</button>
+    <button type="button" class="map-zoom-reset">重置</button>
+    <button type="button" class="map-reader-close">关闭</button>
+  </div>
+  <div class="map-reader-stage" tabindex="0" aria-label="可滚动的地图"></div>
+</dialog>
 <dialog id="search-dialog" aria-labelledby="search-title">
   <div class="search-panel">
     <div class="search-head">

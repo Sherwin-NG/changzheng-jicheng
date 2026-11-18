@@ -114,8 +114,24 @@ button, .button {
 .entry h2 { font-size: 1.2rem; margin: 0.2rem 0; }
 
 .map-block { margin: 1rem 0 2rem; }
-.map-figure { margin: 0; }
+.map-figure { margin: 0; max-width: 100%; }
+.map-slot { max-width: 100%; }
 .geo-map { width: 100%; height: auto; display: block; background: var(--paper); }
+#map-reader {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+}
+#map-reader::backdrop { background: rgba(28, 36, 32, 0.48); }
+.map-reader-bar { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--rule); }
+.map-reader-bar h2 { font-size: 1.05rem; margin: 0 0.4rem 0 0; }
+.map-reader-stage { height: calc(100dvh - 3.4rem); overflow: auto; touch-action: pan-x pan-y; }
+.map-reader-stage .geo-map { width: auto; max-width: none; }
 .map-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(16rem, 0.7fr); gap: 1rem; align-items: start; }
 .node-panel { position: sticky; top: 4.5rem; }
 .legend { list-style: none; padding: 0; display: grid; gap: 0.35rem; margin: 0.6rem 0; }

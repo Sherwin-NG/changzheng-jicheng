@@ -7,6 +7,7 @@ const docs = searchDocs();
 export function bind(page: string): void {
   bindNav();
   bindSearch();
+  bindMapReader();
   bindExpands();
   if (page === "timeline") bindTimeline();
   if (page === "routes") bindRoutes();
@@ -31,6 +32,112 @@ function bindNav(): void {
       button.setAttribute("aria-expanded", "false");
       button.focus();
     }
+  });
+}
+
+function bindMapReader(): void {
+  const dialog = document.querySelector<HTMLDialogElement>("#map-reader");
+  const stage = dialog?.querySelector<HTMLElement>(".map-reader-stage");
+  if (!dialog || !stage) return;
+  let slot: HTMLElement | null = null;
+  let opener: HTMLButtonElement | null = null;
+  let scale = 1;
+
+  const svgInStage = () => stage.querySelector<SVGSVGElement>("svg");
+  const applyScale = () => {
+    const svg = svgInStage();
+    if (!svg) return;
+    const base = svg.viewBox.baseVal.width || 800;
+    svg.style.width = `${Math.round(base * scale)}px`;
+    svg.style.maxWidth = "none";
+    svg.style.height = "auto";
+  };
+  const restore = () => {
+    const svg = svgInStage();
+    if (svg && slot) {
+      svg.style.width = "";
+      svg.style.maxWidth = "";
+      svg.style.height = "";
+      slot.appendChild(svg);
+    }
+    slot = null;
+  };
+  const close = () => {
+    restore();
+    if (dialog.open) dialog.close();
+    opener?.focus();
+  };
+
+  document.querySelectorAll<HTMLButtonElement>(".map-zoom").forEach((button) => {
+    button.addEventListener("click", () => {
+      const home = button.closest("figure")?.querySelector<HTMLElement>(".map-slot");
+      const svg = home?.querySelector<SVGSVGElement>("svg");
+      if (!home || !svg) return;
+      restore();
+      slot = home;
+      opener = button;
+      scale = 1;
+      stage.scrollTop = 0;
+      stage.scrollLeft = 0;
+      stage.appendChild(svg);
+      applyScale();
+      if (!dialog.open) dialog.showModal();
+      dialog.querySelector<HTMLButtonElement>(".map-reader-close")?.focus();
+    });
+  });
+  dialog.querySelector(".map-zoom-in")?.addEventListener("click", () => {
+    scale = Math.min(3, Math.round(scale * 1.25 * 100) / 100);
+    applyScale();
+  });
+  dialog.querySelector(".map-zoom-out")?.addEventListener("click", () => {
+    scale = Math.max(0.8, Math.round((scale / 1.25) * 100) / 100);
+    applyScale();
+  });
+  dialog.querySelector(".map-zoom-reset")?.addEventListener("click", () => {
+    scale = 1;
+    applyScale();
+    stage.scrollTop = 0;
+    stage.scrollLeft = 0;
+  });
+  dialog.querySelector(".map-reader-close")?.addEventListener("click", close);
+  dialog.addEventListener("close", restore);
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key === "+" || event.key === "=") {
+      event.preventDefault();
+      scale = Math.min(3, Math.round(scale * 1.25 * 100) / 100);
+      applyScale();
+    } else if (event.key === "-" || event.key === "_") {
+      event.preventDefault();
+      scale = Math.max(0.8, Math.round((scale / 1.25) * 100) / 100);
+      applyScale();
+    } else if (event.key === "0") {
+      scale = 1;
+      applyScale();
+    } else if (event.key.startsWith("Arrow") && event.target === stage) {
+      const step = 40;
+      if (event.key === "ArrowRight") stage.scrollLeft += step;
+      if (event.key === "ArrowLeft") stage.scrollLeft -= step;
+      if (event.key === "ArrowDown") stage.scrollTop += step;
+      if (event.key === "ArrowUp") stage.scrollTop -= step;
+      event.preventDefault();
+    }
+  });
+  let drag: { x: number; y: number; left: number; top: number } | null = null;
+  stage.addEventListener("pointerdown", (event) => {
+    if ((event.target as Element | null)?.closest(".node-pin, button, a")) return;
+    drag = { x: event.clientX, y: event.clientY, left: stage.scrollLeft, top: stage.scrollTop };
+    stage.setPointerCapture(event.pointerId);
+  });
+  stage.addEventListener("pointermove", (event) => {
+    if (!drag) return;
+    stage.scrollLeft = drag.left - (event.clientX - drag.x);
+    stage.scrollTop = drag.top - (event.clientY - drag.y);
+  });
+  stage.addEventListener("pointerup", () => {
+    drag = null;
+  });
+  stage.addEventListener("pointercancel", () => {
+    drag = null;
   });
 }
 

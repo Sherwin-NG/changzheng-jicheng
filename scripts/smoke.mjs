@@ -208,6 +208,23 @@ check("手机路线无横向溢出", mobileOverflow <= 1, String(mobileOverflow)
 await mobileHome.page.screenshot({ path: join(shotDir, "mobile-390-routes.png"), fullPage: false });
 await mobileHome.page.locator(".geo-map").first().screenshot({ path: join(shotDir, "mobile-routes.png") });
 check("手机视口是390", mobileHome.page.viewportSize()?.width === 390);
+const zoomButton = mobileHome.page.locator(".map-zoom").first();
+await zoomButton.click();
+const reader = mobileHome.page.locator("#map-reader");
+check("放大读图打开", await reader.evaluate((el) => el.open));
+const enlarged = await reader.locator("svg").evaluate((el) => ({
+  width: el.getBoundingClientRect().width,
+  view: el.viewBox.baseVal.width,
+}));
+check("放大后至少按图面一比一", enlarged.width >= enlarged.view - 2, JSON.stringify(enlarged));
+const pageOverflow = await mobileHome.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+check("放大时页面不横向溢出", pageOverflow <= 1, String(pageOverflow));
+await reader.locator(".map-zoom-in").click();
+const wider = await reader.locator("svg").evaluate((el) => el.getBoundingClientRect().width);
+check("按钮可以再放大", wider > enlarged.width + 20, String(wider));
+await mobileHome.page.screenshot({ path: join(shotDir, "mobile-390-map-reader.png"), fullPage: false });
+await reader.locator(".map-reader-close").click();
+check("关闭后焦点回到按钮", await zoomButton.evaluate((el) => document.activeElement === el));
 await mobileHome.page.goto("http://127.0.0.1:43123/index.html", { waitUntil: "networkidle" });
 const mobileHomeOverflow = await mobileHome.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 check("手机首页无横向溢出", mobileHomeOverflow <= 1, String(mobileHomeOverflow));

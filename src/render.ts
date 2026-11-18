@@ -108,10 +108,7 @@ function renderHome(): string {
   <section class="wrap map-block">
     <h2>四路不在一条线上</h2>
     <p>赣南在东，陕甘在北。红二十五军从河南罗山一带北上，红二、红六军团从湘西出来，红四方面军的已知点多在川西和甘南。空白的地方是还没有核到坐标的路段，不是他们没有走过。</p>
-    <figure class="map-figure">
-      ${homeMap.svg}
-      <figcaption>示意图，非精确行军轨迹。虚线只连接相距较近的已知点。灰色虚线是今省级行政区，不是一九三五年的省界。河网是 Natural Earth 的低精度数据，用来认方位。</figcaption>
-    </figure>
+    ${mapView(homeMap.svg, "示意图，非精确行军轨迹。虚线只连接相距较近的已知点。灰色虚线是今省级行政区，不是一九三五年的省界。河网是 Natural Earth 的 1:1000 万概化数据，用来认方位。")}
     ${legendHtml()}
     <p><a href="./routes.html">地图的读法和四张局部图</a></p>
   </section>
@@ -373,17 +370,19 @@ function sourceBy(id: string) {
   return src ? sourceCard(src, false) : "";
 }
 
+function mapView(svg: string, caption: string): string {
+  return `<figure class="map-figure">
+    <div class="map-slot">${svg}</div>
+    <p><button type="button" class="map-zoom">放大读图</button></p>
+    ${caption.startsWith("<") ? `<figcaption>${caption}</figcaption>` : `<figcaption><p>${caption}</p></figcaption>`}
+  </figure>`;
+}
+
 function mapBlock(frameId: keyof typeof frames, prose: string): string {
   const drawn = renderMap(frames[frameId]);
   return `<section class="map-block" id="map-${frameId}">
     <div class="reading">${prose}</div>
-    <figure class="map-figure">
-      ${drawn.svg}
-      <figcaption>
-        <p>示意图，非精确行军轨迹。虚线只连接相距较近的已知点。蓝色河是 Natural Earth 1:1000万概化河网，只用来认方位。灰色虚线是今省级行政区，不是一九三五年省界。西康没有画。</p>
-        ${osmCreditHtml()}
-      </figcaption>
-    </figure>
+    ${mapView(drawn.svg, `<p>示意图，非精确行军轨迹。虚线只连接相距较近的已知点。蓝色河是 Natural Earth 1:1000万概化河网，只用来认方位。灰色虚线是今省级行政区，不是一九三五年省界。西康没有画。</p>${osmCreditHtml()}`)}
     <div class="table-wrap">${drawn.table}</div>
   </section>`;
 }
@@ -417,13 +416,7 @@ function renderRoutes(): string {
     </fieldset>
     <p id="map-empty" class="empty" hidden>请至少选择一路。关掉之后，这一路的点、虚线、范围和地名会隐藏。陆地、今省界和河还留在图上，用来看方位。</p>
     <div class="map-layout">
-      <figure class="map-figure">
-        ${overview.svg}
-        <figcaption>
-          <p>阿尔伯斯投影，标准纬线 25° 和 40°，东西和南北用同一个比例。比例尺在左下角，按投影上的距离画出。示意图，非精确行军轨迹。浅色范围不是行军线。</p>
-          ${osmCreditHtml()}
-        </figcaption>
-      </figure>
+      ${mapView(overview.svg, `<p>阿尔伯斯投影，标准纬线 25° 和 40°，东西和南北用同一个比例。比例尺在左下角，按投影上的距离画出。示意图，非精确行军轨迹。浅色范围不是行军线。</p>${osmCreditHtml()}`)}
       <div id="node-panel" class="node-panel" aria-live="polite">
         <p>点一个符号，或点下面的名单。说明只重复核链稿里的角色；坐标写明是县城、镇还是遗址。</p>
       </div>
