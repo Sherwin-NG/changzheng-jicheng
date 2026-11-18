@@ -315,23 +315,23 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          102.45018,
-          26.1274
+          102.3782194,
+          26.2917694
         ]
       },
       "properties": {
         "id": "jiaopingdu",
-        "name": "皎平渡镇",
-        "role": "巧渡金沙江主要渡口所在镇",
+        "name": "皎平渡口",
+        "role": "巧渡金沙江的渡口遗址，不是皎平渡镇人民政府驻地",
         "armies": [
           "central-red-army"
         ],
-        "geometry_level": "town",
-        "coordinate_source": "Wikidata P625",
-        "wikidata": "https://www.wikidata.org/wiki/Q14181711",
-        "wikidata_label": "皎平渡镇",
+        "geometry_level": "ferry_site",
+        "coordinate_source": "中文维基百科「金沙江皎平渡口」页首坐标 26°17′30.37″N, 102°22′41.59″E，2026-11-18 核对",
+        "wikidata": "https://www.wikidata.org/wiki/Q67934428",
+        "wikidata_label": "金沙江皎平渡口",
         "precision_from_wikidata": null,
-        "note": "",
+        "note": "镇驻地（Wikidata Q14181711，26.1274°N, 102.4502°E）在江外约19.6公里，不再当作渡口。同日读取的 Wikidata P625 为 26.2945°N, 102.3890°E，与此页首坐标约差1.1公里，图上采用页首给出的渡口坐标。",
         "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
       }
     },

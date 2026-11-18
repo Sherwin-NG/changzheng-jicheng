@@ -18,9 +18,15 @@ import {
 } from "./content";
 import { frames, legendHtml, renderMap } from "./atlas";
 import { esc, sourceCard, sourceChips } from "./format";
-import { mediaById, photo, shippedMedia } from "./figures";
+import { photo, shippedMedia } from "./figures";
 import { renderMarkdown } from "./md";
 import { shell } from "./shell";
+
+function readerNote(code: string | undefined): string {
+  if (!code) return "";
+  if (/[A-Za-z]_[A-Za-z]/.test(code)) return "";
+  return `<p class="note">${esc(code)}</p>`;
+}
 
 export function renderPage(page: PageId): string {
   const body = {
@@ -30,7 +36,7 @@ export function renderPage(page: PageId): string {
         "把时段和各路分开",
         "两年里走的不是同一支队伍，结束的日子也不在同一天。下面是核链主文里的背景，源号可以点开。",
         extractH2(research, "整体历史背景"),
-        `${photo("img-ruijin-yunshishan-2010")}<p>瑞金云石山是今天能走到的山。中央机关一九三四年十月十日从瑞金出发，主力渡河是几天后在于都。这座山的照片不能代替那两天的差别。</p>`,
+        `${photo("img-ruijin-yunshishan-2007")}<p>瑞金云石山是今天能走到的山，石壁上的字是后来题的。中央机关一九三四年十月十日从瑞金出发，主力渡河是几天后在于都。这张2007年的照片不能代替那两天的差别。</p>`,
       ),
     forces: renderForces,
     timeline: renderTimeline,
@@ -94,7 +100,7 @@ function renderHome(): string {
     <h2>${esc(armies.concept.label)}</h2>
     <p>${esc(armies.concept.meaning)}。</p>
     ${sourceChips(armies.concept.sources)}
-    <p>通行时段是${esc(overall.duration_description)}。当时的叙述是${esc(String(overall.provinces_then.count))}省，按今天的区划是${esc(String(overall.provinces_now.count))}个省级行政区。战役战斗的通行说法是${esc(overall.campaigns_count)}。</p>
+    <p>通行时段是${esc(overall.duration_description.replace(/。$/, ""))}。当时的叙述是${esc(String(overall.provinces_then.count))}省，按今天的区划是${esc(String(overall.provinces_now.count))}个省级行政区。战役战斗的通行说法是${esc(overall.campaigns_count)}。</p>
     ${sourceChips(overall.sources)}
     <p>${esc(overall.provinces_then.note)}。${esc(overall.provinces_now.note)}。省份名单不拿来反推未经核验的每日路线。</p>
     <p>起点常用一九三四年十月十日中央和中革军委由瑞金出发。于都河以北是十六日集结完毕、十七日起渡河。两层日期都保留。上面那张渡口照片拍于二〇一四年，不是一九三四年的现场。</p>
@@ -318,7 +324,7 @@ function renderTimeline(): string {
       const after = item.after_central_army_long_march
         ? `<p class="warn">这一条发生在中央红军长征结束之后。</p>`
         : "";
-      const precision = item.precision ? `<p class="note">时间精度：${esc(item.precision)}。不补成未经核验的时刻表。</p>` : "";
+      const precision = readerNote(item.precision);
       return `<article class="entry" id="${esc(item.id)}" data-entry="${esc(item.id)}" data-year="${esc(yearOf(item.date))}" data-armies="${esc(item.army.join(" "))}" data-type="${esc(item.type)}">
         <div class="entry-meta"><time>${esc(item.date_label)}</time><span class="badge">${esc(typeLabel(item.type))}</span></div>
         <h2>${esc(item.title)}</h2>
@@ -373,7 +379,7 @@ function mapBlock(frameId: keyof typeof frames, prose: string): string {
     <div class="reading">${prose}</div>
     <figure class="map-figure">
       ${drawn.svg}
-      <figcaption>示意图，非精确行军轨迹。点来自 Wikidata 的遗址、镇或县城坐标。虚线只表示相距较近的已知点谁先谁后。蓝色河网是 Natural Earth 10m，精度不够拿来当战场线。灰色虚线是今省级行政区，不是一九三五年省界。历史省界没有可再分发的数据，所以不画。</figcaption>
+      <figcaption>示意图，非精确行军轨迹。虚线只连接相距较近的已知点。蓝色河是 Natural Earth 1:1000万概化河网；赤水河另据 OpenStreetMap 的具名河道。灰色虚线是今省级行政区，不是一九三五年省界。西康没有画。</figcaption>
     </figure>
     <div class="table-wrap">${drawn.table}</div>
   </section>`;
@@ -395,16 +401,7 @@ function renderRoutes(): string {
     )
     .join("");
   const overview = renderMap(frames.overview);
-  const schematic = mediaById("img-map-schematic-zh-svg");
-  const schematicFig = schematic?.ship_filename
-    ? `<figure class="plate">
-        <img src="./media/${esc(schematic.ship_filename)}" alt="后人绘制的中央红军1934至1935年路线示意图，不是本站地图，也不是精确轨迹" loading="lazy" decoding="async" />
-        <figcaption>
-          <p>${esc(schematic.caption_required)}</p>
-          <p>${esc(schematic.artist)}。${esc(schematic.years_label)}。许可 <a href="${esc(schematic.license_url ?? "")}">${esc(schematic.license)}</a>。<a href="${esc(schematic.file_page)}">原始文件页</a>。这不是本站画的总图。</p>
-        </figcaption>
-      </figure>`
-    : "";
+  const schematicFig = photo("img-map-schematic-zh-svg");
   return `${chapter("四路各自在哪里，不是一条红线", "北在图的上方。方块、圆点、菱形、三角各代表一路。虚线只连接离得较近的已知点，中间缺坐标的地方留白。")}
   <div class="wrap">
     <p class="disclaimer" id="map-disclaimer">${esc(routeMeta.disclaimer)} ${esc(routeMeta.mapDisclaimer)} 示意图，非精确行军轨迹。</p>
@@ -415,11 +412,11 @@ function renderRoutes(): string {
       <legend>显示哪一路</legend>
       ${checks}
     </fieldset>
-    <p id="map-empty" class="empty" hidden>请至少选择一路。</p>
+    <p id="map-empty" class="empty" hidden>请至少选择一路。关掉之后，这一路的点、虚线、范围和地名会隐藏。陆地、今省界和河还留在图上，用来看方位。</p>
     <div class="map-layout">
       <figure class="map-figure">
         ${overview.svg}
-        <figcaption>阿尔伯斯投影，标准纬线 25° 和 40°。比例尺标在图中央附近。示意图，非精确行军轨迹。</figcaption>
+        <figcaption>阿尔伯斯投影，标准纬线 25° 和 40°，东西和南北用同一个比例。比例尺在左下角，按投影上的距离画出。示意图，非精确行军轨迹。浅色范围不是行军线。</figcaption>
       </figure>
       <div id="node-panel" class="node-panel" aria-live="polite">
         <p>点一个符号，或点下面的名单。说明只重复核链稿里的角色；坐标写明是县城、镇还是遗址。</p>
@@ -427,14 +424,14 @@ function renderRoutes(): string {
     </div>
     <div class="table-wrap">${overview.table}</div>
     <ul class="rules">${routeMeta.rules.map((r) => `<li>${esc(r)}</li>`).join("")}</ul>
-    ${mapBlock("xiang", `<h2>湘江</h2><p>队伍离开于都之后，下一次能在图上站稳的是道县、兴安、全州三个县城。湘江战役发生在这三县之间。这里没有找到可以合法使用的战场或渡口照片，所以不用长沙的江景来顶。三个点都是今天的县城驻地，不是渡口测量点。过江以后人数大减，通道、黎平才把方向改向贵州。</p>`)}
-    ${mapBlock("chishui", `<h2>赤水</h2><p>四渡赤水发生在这条河的上下游。茅台是三渡的通行地点之一，图上的点是茅台镇。习水是县城，赤水市的点是市政府所在地，都不能当成某一次的桥。Natural Earth 的 10m 河网里没有具名的赤水河，所以不拿别的河来冒充，也不编四个渡口。一渡、二渡、四渡的桥点都缺核验坐标，只标这块范围。</p>${photo("img-chishui-maotai-2016")}`)}
-    ${mapBlock("jinsha", `<h2>金沙江和大渡河</h2><p>渡过金沙江选在皎平渡，是为了躲开下游已经设防的渡口。安顺场的渡口窄，后面的部队沿河向北，到泸定桥过河。皎平渡到安顺场相距大约三百五十公里，中间没有逐日驻地，图上不连。泸定桥再往北是夹金山。</p>${photo("img-jiaopingdu-carving-2020")}${photo("img-dadu-terrace-2012")}${photo("img-luding-bridge-2010")}`)}
-    ${mapBlock("snow", `<h2>雪山和草地</h2><p>夹金山是雪山的一个垭口，若尔盖代表川西北那一片湿地。懋功（今小金）到草地之间还有两河口、毛儿盖，没有逐镇坐标，所以两段之间留白。草地画成一块范围，不是某人某日的脚印。</p>${photo("img-jiajin-pass-2013")}${photo("img-zoige-wetland-2013")}`)}
-    ${mapBlock("endings", `<h2>三个不能合成一点的结束</h2><p>吴起镇是中央红军这一路的结束。会宁是和红四方面军会师的地方。将台堡在今宁夏西吉，历史叙述里常把它记在甘肃。三处隔着不同的距离。中央红军到吴起，并不等于一九三六年十月将台堡的总结束。</p>${photo("img-huining-tower-2012")}${photo("img-jiangtaibao-monument-2026")}${photo("img-wuqi-today-2010")}`)}
+    ${mapBlock("xiang", `<h2>湘江</h2><p>道县、兴安、全州是三个县城，不是渡口。蓝线是湘江干流：兴安、全州靠近江，道县在东边的支流一带，不在这条干流上。方框只表示战役发生在这三县之间，没有把三座县城连成一条进军线。这里没有可合法使用的战场照片，不用长沙的江景来顶。过江以后人数大减，通道、黎平才把方向改向贵州。</p>`)}
+    ${mapBlock("chishui", `<h2>赤水</h2><p>图上的蓝线是 OpenStreetMap 里名叫赤水河的河道，茅台镇在河附近。习水是县城，赤水是市政府所在地，都不能当成某一次的桥。乌江如果出现，是另一条河。一渡、二渡、四渡的桥点没有核验坐标，只留这块范围，不编渡口。茅台是三渡的通行地点之一。</p>${photo("img-chishui-maotai-2016")}`)}
+    ${mapBlock("jinsha", `<h2>金沙江和大渡河</h2><p>图上的皎平渡是渡口遗址，不是南边约二十公里的镇驻地。安顺场的渡口窄，后面的部队沿河向北到泸定桥。渡口到安顺场大约三百五十公里，中间没有逐日驻地，所以不连线。</p>${photo("img-jiaopingdu-bridge-2020")}${photo("img-dadu-terrace-2012")}${photo("img-luding-bridge-2018")}`)}
+    ${mapBlock("snow", `<h2>雪山和草地</h2><p>夹金山在小金以南。若尔盖到迭部的方框是草地的阅读范围，围的是这两个已核验的县城一带，不是测出来的湿地边界。小金和若尔盖之间还有两河口、毛儿盖，没有逐镇坐标，所以中间留白。</p>${photo("img-jiajin-pass-2013")}${photo("img-zoige-wetland-2013")}`)}
+    ${mapBlock("endings", `<h2>三个不能合成一点的结束</h2><p>吴起镇是中央红军这一路的结束，在今陕西。会宁在今甘肃，是和红四方面军会师的地方。将台堡在今宁夏西吉，当时的叙述常把它记在甘肃。三处不连成一条线。中央红军到吴起，并不等于一九三六年十月将台堡的总结束。将台堡不放纪念碑特写，位置看这张图。</p>${photo("img-huining-tower-2012")}${photo("img-wuqi-today-2010")}`)}
     <section class="reading">
       <h2>一张别人画的对照图</h2>
-      <p>下面这张是维基共享资源上的后期示意图，主要画中央红军一九三四到一九三五年。它不是本站的地图，也不能代表红二十五军、红四方面军和红二方面军。</p>
+      <p>下面这张是维基共享资源上的后期示意图，主要画中央红军一九三四到一九三五年，画不到会宁和将台堡。比例尺用的是英里。图上还有首尔，以及利多、英帕尔、曼德勒、腊戍、密支那这些更接近后来缅甸战场的地名。它不是本站的地图，也不能代表另外三路。</p>
       ${schematicFig}
     </section>
     <h2>三十五个节点</h2>
@@ -446,13 +443,11 @@ function renderRoutes(): string {
 function pictureLedger(): string {
   const rows = shippedMedia()
     .map((item) => {
-      const license = item.license_url
-        ? `<a href="${esc(item.license_url)}">${esc(item.license)}</a>`
-        : esc(item.license);
-      return `<li><strong>${esc(item.place)}</strong> ${esc(item.years_label)}，${esc(item.artist)}。${license}。<a href="${esc(item.file_page)}">文件页</a>。${esc(item.derivative ?? "")} ${esc(item.caption_required)}</li>`;
+      const license = item.licenseUrl ? `<a href="${esc(item.licenseUrl)}">${esc(item.license)}</a>` : esc(item.license);
+      return `<li><strong>${esc(item.place)}</strong> ${esc(item.title)}，${esc(item.dateLabel)}，${esc(item.artist)}。${license}。<a href="${esc(item.filePage)}">原始文件页</a>。${esc(item.derivative)}</li>`;
     })
     .join("");
-  return `<p>底图陆地、河网和今省级行政区来自 Natural Earth，公共领域。图上可以写 Made with Natural Earth。民国省界没有下载到可再分发的文件，所以不画。坐标是 Wikidata P625，检索于 2026-11-18。</p><ul class="plain">${rows}</ul>`;
+  return `<p>陆地、今省界和大多数河来自 Natural Earth，公共领域，比例尺是 1:1000 万。赤水河来自 OpenStreetMap 的具名河道，许可是 ODbL。西康等民国省界没有可再分发的数据，所以不画。皎平渡用的是渡口坐标，不是镇驻地。</p><ul class="plain">${rows}</ul>`;
 }
 
 function renderMeetings(): string {
@@ -515,11 +510,11 @@ function battleArticle(item: (typeof battles)[number]): string {
       : item.id === "B03"
         ? photo("img-chishui-maotai-2016") + mapBlock("chishui", "<p>茅台镇的河岸是二〇一六年的样子。四次渡河的桥点没有逐一核验，图上只标范围。</p>")
         : item.id === "B04"
-          ? photo("img-jiaopingdu-carving-2020")
+          ? photo("img-jiaopingdu-bridge-2020")
           : item.id === "B05"
             ? photo("img-dadu-terrace-2012")
             : item.id === "B06"
-              ? photo("img-luding-bridge-2010") + mapBlock("jinsha", "<p>皎平渡、安顺场和泸定桥不在一条可以连满的线上。安顺场到泸定桥这一小段才标了方向。</p>")
+              ? photo("img-luding-bridge-2018") + mapBlock("jinsha", "<p>皎平渡标的是渡口，不是镇驻地。安顺场到泸定桥这一小段才标了方向。</p>")
               : "";
   return `<article class="entry" id="${esc(item.id)}">
     <div class="entry-meta"><time>${esc(item.date)}</time>${item.army.map((a) => `<span class="badge">${esc(ARMY_LABEL[a] ?? a)}</span>`).join("")}</div>
@@ -530,7 +525,7 @@ function battleArticle(item: (typeof battles)[number]): string {
     ${item.significance ? `<p>${esc(item.significance)}</p>` : ""}
     ${item.note ? `<p class="warn">${esc(item.note)}</p>` : ""}
     ${item.caution ? `<p class="warn">${esc(item.caution)}</p>` : ""}
-    ${item.precision ? `<p class="note">${esc(item.precision)}</p>` : ""}
+    ${readerNote(item.precision)}
     ${sourceChips(item.sources)}
   </article>`;
 }

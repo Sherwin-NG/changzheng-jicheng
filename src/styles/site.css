@@ -42,7 +42,7 @@ img { max-width: 100%; height: auto; display: block; }
 a { color: var(--water); }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 2px solid var(--water); outline-offset: 3px; }
-[hidden] { display: none !important; }
+[hidden], .is-off { display: none !important; }
 .skip {
   position: absolute; left: 0.5rem; top: -3rem; background: var(--ink); color: white; padding: 0.4rem 0.6rem;
 }
@@ -83,7 +83,7 @@ button, .button {
 .plate img { width: 100%; background: var(--land); }
 .plate-small { max-width: 300px; }
 .plate-small img { width: 300px; max-width: 100%; }
-.plate figcaption, .map-figure figcaption { color: var(--muted); font-size: 0.92rem; line-height: 1.55; }
+.plate figcaption, .map-figure figcaption, .map-table { color: var(--muted); font-size: 1rem; line-height: 1.6; }
 .plate figcaption p, .map-figure figcaption p { margin: 0.25rem 0; }
 
 .contents { list-style: none; padding: 0; }
@@ -135,7 +135,9 @@ button, .button {
 .node-list span { display: block; color: var(--muted); font-size: 0.85rem; }
 .lane-toggle { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; border: 0; padding: 0.4rem 0; }
 .lane-toggle legend { width: 100%; }
-.map-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; margin-top: 0.6rem; }
+.map-table { width: 100%; border-collapse: collapse; font-size: 1rem; margin-top: 0.6rem; }
+details.tech { margin: 0.8rem 0 1.2rem; }
+details.tech summary { cursor: pointer; }
 .map-table caption { text-align: left; color: var(--muted); margin-bottom: 0.3rem; }
 .map-table th, .map-table td { border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; padding: 0.35rem 0.3rem; }
 .table-wrap { overflow-x: auto; }

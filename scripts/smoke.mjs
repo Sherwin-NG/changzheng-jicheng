@@ -123,7 +123,19 @@ await home.page.screenshot({ path: join(shotDir, "desktop-routes-page.png"), ful
 await home.page.locator(".node-jump", { hasText: "于都" }).click();
 check("节点说明写明不是精确轨迹", (await home.page.locator("#node-panel").innerText()).includes("非精确行军轨迹"));
 const mapText = await home.page.locator(".geo-map").first().evaluate((el) => el.textContent ?? "");
-check("总图有指北和比例尺", mapText.includes("北") && mapText.includes("公里"), mapText.slice(0, 180));
+check("总图有指北和比例尺", mapText.includes("北") && mapText.includes("公里"), mapText.slice(0, 120));
+const mapCount = await home.page.locator("svg.geo-map").count();
+for (let i = 0; i < mapCount; i += 1) {
+  const info = await home.page.locator("svg.geo-map").nth(i).evaluate((el) => ({
+    title: el.querySelector("title")?.textContent ?? "",
+    ew: Number(el.getAttribute("data-ew-px")),
+    ns: Number(el.getAttribute("data-ns-px")),
+    w: el.viewBox.baseVal.width,
+  }));
+  const ratio = Math.abs(info.ew - info.ns) / info.ew;
+  check(`比例尺同比例 ${info.title}`, ratio < 0.08 && info.ew + 24 < info.w, JSON.stringify(info));
+}
+await home.page.locator("svg.geo-map").nth(4).screenshot({ path: join(shotDir, "desktop-snow-map.png") });
 const overflow = await home.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 check("路线页无横向溢出", overflow <= 1, String(overflow));
 const imgCount = await home.page.locator("img").count();
@@ -151,6 +163,18 @@ await home.page.locator("input[name='lane']").evaluateAll((boxes) => boxes.forEa
   box.dispatchEvent(new Event("change", { bubbles: true }));
 }));
 check("路线全部关闭有反馈", await home.page.locator("#map-empty").isVisible());
+const hiddenPins = await home.page.locator(".node-pin.is-off").count();
+const visiblePins = await home.page.locator(".node-pin:not(.is-off)").count();
+check("全关后没有部队点", visiblePins === 0 && hiddenPins > 0, `可见 ${visiblePins}，隐藏 ${hiddenPins}`);
+await home.page.locator("svg.geo-map").first().screenshot({ path: join(shotDir, "desktop-routes-filters-off.png") });
+await home.page.locator("input[name='lane'][value='central-red-army']").check();
+const centralVisible = await home.page.locator(".node-pin:not(.is-off)").count();
+const foreignVisible = await home.page.locator(".node-pin:not(.is-off)").evaluateAll((pins) =>
+  pins.filter((pin) => !(pin.getAttribute("data-lanes") ?? "").includes("central-red-army")).length,
+);
+check("只开中央红军时不留其他路的点", centralVisible > 0 && foreignVisible === 0, `可见 ${centralVisible}，其他 ${foreignVisible}`);
+await home.page.locator("input[name='lane']").evaluateAll((boxes) => boxes.forEach((box) => { box.checked = true; box.dispatchEvent(new Event("change", { bubbles: true })); }));
+check("重新全开后点回来了", (await home.page.locator(".node-pin:not(.is-off)").count()) >= hiddenPins);
 
 await home.page.goto("http://127.0.0.1:43123/battles.html", { waitUntil: "networkidle" });
 check("战役页有湘江说明", (await home.page.locator("body").innerText()).includes("不用长沙"));
@@ -179,7 +203,9 @@ await mobileHome.page.goto("http://127.0.0.1:43123/routes.html", { waitUntil: "n
 check("手机路线免责声明", await mobileHome.page.locator("#map-disclaimer").isVisible());
 const mobileOverflow = await mobileHome.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 check("手机路线无横向溢出", mobileOverflow <= 1, String(mobileOverflow));
+await mobileHome.page.screenshot({ path: join(shotDir, "mobile-390-routes.png"), fullPage: false });
 await mobileHome.page.locator(".geo-map").first().screenshot({ path: join(shotDir, "mobile-routes.png") });
+check("手机视口是390", mobileHome.page.viewportSize()?.width === 390);
 await mobileHome.page.goto("http://127.0.0.1:43123/index.html", { waitUntil: "networkidle" });
 const mobileHomeOverflow = await mobileHome.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 check("手机首页无横向溢出", mobileHomeOverflow <= 1, String(mobileHomeOverflow));

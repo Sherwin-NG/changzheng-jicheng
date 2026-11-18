@@ -243,7 +243,7 @@ function bindRoutes(): void {
     const current = document.activeElement;
     if (!(current instanceof Element) || !current.classList.contains("node-pin")) return;
     if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
-    const pins = [...document.querySelectorAll<HTMLElement>(".node-pin")].filter((pin) => !pin.hidden);
+    const pins = [...document.querySelectorAll<HTMLElement>(".node-pin")].filter((pin) => !pin.classList.contains("is-off"));
     const index = pins.indexOf(current as HTMLElement);
     if (index < 0) return;
     event.preventDefault();
@@ -256,12 +256,13 @@ function bindRoutes(): void {
 
 function applyLanes(): void {
   const selectedLanes = [...document.querySelectorAll<HTMLInputElement>('input[name="lane"]:checked')].map((box) => box.value);
-  document.querySelectorAll<SVGPathElement>("[data-lane]").forEach((path) => {
-    path.toggleAttribute("hidden", !selectedLanes.includes(path.dataset.lane ?? ""));
+  document.querySelectorAll<Element>("[data-lane]").forEach((item) => {
+    const lane = (item as HTMLElement).dataset.lane ?? "";
+    item.classList.toggle("is-off", !selectedLanes.includes(lane));
   });
-  document.querySelectorAll<HTMLButtonElement>(".node-pin").forEach((pin) => {
-    const lanes = (pin.dataset.lanes ?? "").split(" ");
-    pin.hidden = !lanes.some((lane) => selectedLanes.includes(lane));
+  document.querySelectorAll<Element>(".node-pin").forEach((pin) => {
+    const lanes = ((pin as HTMLElement).dataset.lanes ?? "").split(" ").filter(Boolean);
+    pin.classList.toggle("is-off", !lanes.some((lane) => selectedLanes.includes(lane)));
   });
   const empty = document.querySelector<HTMLElement>("#map-empty");
   if (empty) empty.hidden = selectedLanes.length !== 0;
