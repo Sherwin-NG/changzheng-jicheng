@@ -1,0 +1,771 @@
+{
+  "type": "FeatureCollection",
+  "name": "longmarch-schematic-nodes",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "disclaimer": "本文件只提供可核验的近似点位，用于表达空间关系（南北、江河、山脉与会师地的相对位置）。禁止把点连成精确行军轨迹，也禁止把县级驻地当作战场测量点。当代行政区划与1930年代不同。",
+  "coordinate_reference": "WGS84 经纬度，来源为 Wikidata 属性 P625，检索于 2026-11-18。",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.03333333333,
+          25.883333333333
+        ]
+      },
+      "properties": {
+        "id": "ruijin",
+        "name": "瑞金",
+        "role": "中央首脑机关出发标志地（县级市驻地近似）",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_or_city_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1025459",
+        "wikidata_label": "瑞金市",
+        "precision_from_wikidata": 0.016666666666667,
+        "note": "更宜结合纪念地细部，此处为市驻地坐标。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.42632,
+          25.9609
+        ]
+      },
+      "properties": {
+        "id": "yudu-site",
+        "name": "中央红军长征出发地旧址（于都）",
+        "role": "于都集结出发/渡口相关全国重点文保单位",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "heritage_site",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q10875109",
+        "wikidata_label": "中央红军长征出发地旧址",
+        "precision_from_wikidata": 1e-06,
+        "note": "来自维基数据/共享资源条目坐标，精度高于县城驻地。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.91611111,
+          27.69138889
+        ]
+      },
+      "properties": {
+        "id": "zunyi-site",
+        "name": "遵义会议会址",
+        "role": "遵义会议",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "heritage_site",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q15931369",
+        "wikidata_label": "遵义会议会址",
+        "precision_from_wikidata": 1e-06,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          109.13265,
+          26.23548
+        ]
+      },
+      "properties": {
+        "id": "liping",
+        "name": "黎平",
+        "role": "黎平会议",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1152707",
+        "wikidata_label": "黎平县",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          109.77826,
+          26.15754
+        ]
+      },
+      "properties": {
+        "id": "tongdao",
+        "name": "通道",
+        "role": "通道会议",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1199383",
+        "wikidata_label": "通道侗族自治县",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.47229,
+          27.07072
+        ]
+      },
+      "properties": {
+        "id": "wengan",
+        "name": "瓮安（猴场一带所在县）",
+        "role": "猴场会议所在县",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1346556",
+        "wikidata_label": "瓮安县",
+        "precision_from_wikidata": null,
+        "note": "猴场为镇级，此处先用县驻地，细化时应再核猴场镇坐标。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          111.0669,
+          25.93104
+        ]
+      },
+      "properties": {
+        "id": "quanzhou",
+        "name": "全州",
+        "role": "湘江战役相关县域（桂北）",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1343801",
+        "wikidata_label": "全州县",
+        "precision_from_wikidata": null,
+        "note": "战役沿江展开，县驻地不能当成唯一渡口。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          111.58605,
+          25.51769
+        ]
+      },
+      "properties": {
+        "id": "daoxian",
+        "name": "道县",
+        "role": "湘江战役相关县域（湘南）",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1165386",
+        "wikidata_label": "道县",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.66666666667,
+          25.616666666667
+        ]
+      },
+      "properties": {
+        "id": "xingan",
+        "name": "兴安",
+        "role": "湘江战役相关县域",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1355534",
+        "wikidata_label": "兴安县",
+        "precision_from_wikidata": 0.016666666666667,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.36753,
+          27.85453
+        ]
+      },
+      "properties": {
+        "id": "maotai",
+        "name": "茅台镇",
+        "role": "四渡赤水中三渡的通行地点之一",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "town",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q6753695",
+        "wikidata_label": "茅台镇",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.20886,
+          28.31992
+        ]
+      },
+      "properties": {
+        "id": "xishui",
+        "name": "习水",
+        "role": "土城/青杠坡及赤水河沿岸所在县",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q531259",
+        "wikidata_label": "习水县",
+        "precision_from_wikidata": null,
+        "note": "土城为镇，细化时应再核土城镇坐标。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.69456,
+          28.59023
+        ]
+      },
+      "properties": {
+        "id": "chishui-city",
+        "name": "赤水市",
+        "role": "赤水河下游城市，用于水系定位，不必当作渡口本身",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "city_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q65367",
+        "wikidata_label": "赤水市",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.3782194,
+          26.2917694
+        ]
+      },
+      "properties": {
+        "id": "jiaopingdu",
+        "name": "皎平渡口",
+        "role": "巧渡金沙江的渡口遗址，不是皎平渡镇人民政府驻地",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "ferry_site",
+        "coordinate_source": "中文维基百科「金沙江皎平渡口」页首坐标 26°17′30.37″N, 102°22′41.59″E，2026-11-18 核对",
+        "wikidata": "https://www.wikidata.org/wiki/Q67934428",
+        "wikidata_label": "金沙江皎平渡口",
+        "precision_from_wikidata": null,
+        "note": "镇驻地（Wikidata Q14181711，26.1274°N, 102.4502°E）在江外约19.6公里，不再当作渡口。同日读取的 Wikidata P625 为 26.2945°N, 102.3890°E，与此页首坐标约差1.1公里，图上采用页首给出的渡口坐标。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.25481,
+          28.74528
+        ]
+      },
+      "properties": {
+        "id": "yihai",
+        "name": "彝海镇",
+        "role": "彝海结盟所在镇",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "town",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q11069528",
+        "wikidata_label": "彝海镇",
+        "precision_from_wikidata": null,
+        "note": "结盟具体湖畔点可再细化，但镇级已能表达空间位置。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.28319,
+          29.27647
+        ]
+      },
+      "properties": {
+        "id": "anshunchang",
+        "name": "安顺场镇",
+        "role": "强渡大渡河",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "town",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q10947331",
+        "wikidata_label": "安顺场镇",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.23016667,
+          29.9145
+        ]
+      },
+      "properties": {
+        "id": "luding-bridge",
+        "name": "泸定桥",
+        "role": "飞夺泸定桥",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "heritage_site",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1873911",
+        "wikidata_label": "泸定桥",
+        "precision_from_wikidata": 2.777777777778e-05,
+        "note": "桥梁本身坐标，精度较高。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.41666666667,
+          30.333333333333
+        ]
+      },
+      "properties": {
+        "id": "jiajin",
+        "name": "夹金山",
+        "role": "中央红军翻越的第一座大雪山",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "mountain",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q3321883",
+        "wikidata_label": "夹金山",
+        "precision_from_wikidata": 0.00027777777777778,
+        "note": "山体范围大，此为条目给出的代表坐标。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.81339,
+          30.37001
+        ]
+      },
+      "properties": {
+        "id": "baoxing",
+        "name": "宝兴",
+        "role": "夹金山北麓相关县域",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q807084",
+        "wikidata_label": "宝兴县",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.36236,
+          31.00128
+        ]
+      },
+      "properties": {
+        "id": "xiaojin",
+        "name": "小金（懋功）",
+        "role": "懋功会师",
+        "armies": [
+          "central-red-army",
+          "fourth-front-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1169539",
+        "wikidata_label": "小金县",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          102.96074,
+          33.57647
+        ]
+      },
+      "properties": {
+        "id": "zoige",
+        "name": "若尔盖",
+        "role": "草地地带的当代县域，用于自然环境定位",
+        "armies": [
+          "central-red-army",
+          "fourth-front-army",
+          "second-front-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q218429",
+        "wikidata_label": "若尔盖县",
+        "precision_from_wikidata": null,
+        "note": "不是某日过草地的精确落脚点。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.21643,
+          34.05614
+        ]
+      },
+      "properties": {
+        "id": "diebu",
+        "name": "迭部",
+        "role": "俄界、腊子口所在县",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1365033",
+        "wikidata_label": "迭部县",
+        "precision_from_wikidata": null,
+        "note": "俄界（高吉）、腊子口应尽量用更细地名再核。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.22394,
+          34.23216
+        ]
+      },
+      "properties": {
+        "id": "hadapu",
+        "name": "哈达铺镇",
+        "role": "整编与获悉陕北根据地",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "town",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q10922234",
+        "wikidata_label": "哈达铺镇",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          108.17204,
+          36.92461
+        ]
+      },
+      "properties": {
+        "id": "wuqi",
+        "name": "吴起",
+        "role": "中央红军长征结束地（县）",
+        "armies": [
+          "central-red-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1152581",
+        "wikidata_label": "吴起县",
+        "precision_from_wikidata": null,
+        "note": "吴起镇/吴起县城应再结合纪念地细部。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.05181,
+          35.6922
+        ]
+      },
+      "properties": {
+        "id": "huining",
+        "name": "会宁",
+        "role": "红一、四方面军会师",
+        "armies": [
+          "central-red-army",
+          "fourth-front-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1201383",
+        "wikidata_label": "会宁县",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.83963,
+          35.81754
+        ]
+      },
+      "properties": {
+        "id": "jiangtaibao",
+        "name": "将台堡镇",
+        "role": "红一、二方面军会师，长征结束标志地之一",
+        "armies": [
+          "central-red-army",
+          "second-front-army"
+        ],
+        "geometry_level": "town",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q10957319",
+        "wikidata_label": "将台堡镇",
+        "precision_from_wikidata": null,
+        "note": "今属宁夏西吉；历史叙述常作甘肃静宁以北。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.7251,
+          35.96599
+        ]
+      },
+      "properties": {
+        "id": "xiji",
+        "name": "西吉",
+        "role": "将台堡今属县",
+        "armies": [
+          "central-red-army",
+          "second-front-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q938997",
+        "wikidata_label": "西吉县",
+        "precision_from_wikidata": null,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.98864,
+          31.62734
+        ]
+      },
+      "properties": {
+        "id": "ganzi",
+        "name": "甘孜镇",
+        "role": "红二、六军团与红四方面军会师",
+        "armies": [
+          "second-front-army",
+          "fourth-front-army"
+        ],
+        "geometry_level": "town",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q5526258",
+        "wikidata_label": "甘孜镇",
+        "precision_from_wikidata": 2.7777777777778e-07,
+        "note": "",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.15868,
+          29.40199
+        ]
+      },
+      "properties": {
+        "id": "sangzhi",
+        "name": "桑植",
+        "role": "红二、六军团出发地所在县（刘家坪）",
+        "armies": [
+          "second-front-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1338555",
+        "wikidata_label": "桑植县",
+        "precision_from_wikidata": null,
+        "note": "刘家坪为更细地名，细化时应再核。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.52461,
+          32.20256
+        ]
+      },
+      "properties": {
+        "id": "luoshan",
+        "name": "罗山",
+        "role": "红二十五军出发地何家冲所在县",
+        "armies": [
+          "25th-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1198730",
+        "wikidata_label": "罗山县",
+        "precision_from_wikidata": null,
+        "note": "何家冲应再核村级坐标，勿把县城当成渡口/出发营地。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.18655,
+          36.87953
+        ]
+      },
+      "properties": {
+        "id": "yanchuan",
+        "name": "延川",
+        "role": "永坪会师所在县",
+        "armies": [
+          "25th-army"
+        ],
+        "geometry_level": "county_seat",
+        "coordinate_source": "Wikidata P625",
+        "wikidata": "https://www.wikidata.org/wiki/Q1201433",
+        "wikidata_label": "延川县",
+        "precision_from_wikidata": null,
+        "note": "永坪/永平镇应再核镇级坐标。",
+        "disclaimer": "坐标为可核验的遗址、乡镇或县级驻地近似位置，用于空间关系示意，不是精确行军轨迹点。"
+      }
+    }
+  ]
+}

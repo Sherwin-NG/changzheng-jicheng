@@ -281,7 +281,7 @@
         "S16",
         "S21"
       ],
-      "precision": "month_to_mid_late_month"
+      "precision": "时间只写到这个月的中下旬，不补成某一天。"
     },
     {
       "id": "T18",

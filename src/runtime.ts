@@ -1,3 +1,4 @@
+import { levelLabel, nodePlaces, placeById } from "./atlas";
 import { nodes, searchDocs, sourceById, ARMY_LABEL } from "./content";
 import { esc } from "./format";
 
@@ -6,6 +7,7 @@ const docs = searchDocs();
 export function bind(page: string): void {
   bindNav();
   bindSearch();
+  bindMapReader();
   bindExpands();
   if (page === "timeline") bindTimeline();
   if (page === "routes") bindRoutes();
@@ -30,6 +32,112 @@ function bindNav(): void {
       button.setAttribute("aria-expanded", "false");
       button.focus();
     }
+  });
+}
+
+function bindMapReader(): void {
+  const dialog = document.querySelector<HTMLDialogElement>("#map-reader");
+  const stage = dialog?.querySelector<HTMLElement>(".map-reader-stage");
+  if (!dialog || !stage) return;
+  let slot: HTMLElement | null = null;
+  let opener: HTMLButtonElement | null = null;
+  let scale = 1;
+
+  const svgInStage = () => stage.querySelector<SVGSVGElement>("svg");
+  const applyScale = () => {
+    const svg = svgInStage();
+    if (!svg) return;
+    const base = svg.viewBox.baseVal.width || 800;
+    svg.style.width = `${Math.round(base * scale)}px`;
+    svg.style.maxWidth = "none";
+    svg.style.height = "auto";
+  };
+  const restore = () => {
+    const svg = svgInStage();
+    if (svg && slot) {
+      svg.style.width = "";
+      svg.style.maxWidth = "";
+      svg.style.height = "";
+      slot.appendChild(svg);
+    }
+    slot = null;
+  };
+  const close = () => {
+    restore();
+    if (dialog.open) dialog.close();
+    opener?.focus();
+  };
+
+  document.querySelectorAll<HTMLButtonElement>(".map-zoom").forEach((button) => {
+    button.addEventListener("click", () => {
+      const home = button.closest("figure")?.querySelector<HTMLElement>(".map-slot");
+      const svg = home?.querySelector<SVGSVGElement>("svg");
+      if (!home || !svg) return;
+      restore();
+      slot = home;
+      opener = button;
+      scale = 1;
+      stage.scrollTop = 0;
+      stage.scrollLeft = 0;
+      stage.appendChild(svg);
+      applyScale();
+      if (!dialog.open) dialog.showModal();
+      dialog.querySelector<HTMLButtonElement>(".map-reader-close")?.focus();
+    });
+  });
+  dialog.querySelector(".map-zoom-in")?.addEventListener("click", () => {
+    scale = Math.min(3, Math.round(scale * 1.25 * 100) / 100);
+    applyScale();
+  });
+  dialog.querySelector(".map-zoom-out")?.addEventListener("click", () => {
+    scale = Math.max(0.8, Math.round((scale / 1.25) * 100) / 100);
+    applyScale();
+  });
+  dialog.querySelector(".map-zoom-reset")?.addEventListener("click", () => {
+    scale = 1;
+    applyScale();
+    stage.scrollTop = 0;
+    stage.scrollLeft = 0;
+  });
+  dialog.querySelector(".map-reader-close")?.addEventListener("click", close);
+  dialog.addEventListener("close", restore);
+  dialog.addEventListener("keydown", (event) => {
+    if (event.key === "+" || event.key === "=") {
+      event.preventDefault();
+      scale = Math.min(3, Math.round(scale * 1.25 * 100) / 100);
+      applyScale();
+    } else if (event.key === "-" || event.key === "_") {
+      event.preventDefault();
+      scale = Math.max(0.8, Math.round((scale / 1.25) * 100) / 100);
+      applyScale();
+    } else if (event.key === "0") {
+      scale = 1;
+      applyScale();
+    } else if (event.key.startsWith("Arrow") && event.target === stage) {
+      const step = 40;
+      if (event.key === "ArrowRight") stage.scrollLeft += step;
+      if (event.key === "ArrowLeft") stage.scrollLeft -= step;
+      if (event.key === "ArrowDown") stage.scrollTop += step;
+      if (event.key === "ArrowUp") stage.scrollTop -= step;
+      event.preventDefault();
+    }
+  });
+  let drag: { x: number; y: number; left: number; top: number } | null = null;
+  stage.addEventListener("pointerdown", (event) => {
+    if ((event.target as Element | null)?.closest(".node-pin, button, a")) return;
+    drag = { x: event.clientX, y: event.clientY, left: stage.scrollLeft, top: stage.scrollTop };
+    stage.setPointerCapture(event.pointerId);
+  });
+  stage.addEventListener("pointermove", (event) => {
+    if (!drag) return;
+    stage.scrollLeft = drag.left - (event.clientX - drag.x);
+    stage.scrollTop = drag.top - (event.clientY - drag.y);
+  });
+  stage.addEventListener("pointerup", () => {
+    drag = null;
+  });
+  stage.addEventListener("pointercancel", () => {
+    drag = null;
   });
 }
 
@@ -232,60 +340,69 @@ function bindRoutes(): void {
     });
   }
   document.querySelector("#lane-toggle")?.addEventListener("change", applyLanes);
-  document.querySelectorAll<HTMLButtonElement>("[data-node]").forEach((button) => {
-    button.addEventListener("click", () => selectNode(button.dataset.node ?? ""));
+  document.querySelectorAll<HTMLElement>(".node-pin, .node-jump").forEach((button) => {
+    button.addEventListener("click", () => selectNode(button.dataset.node ?? "", button.dataset.place ?? ""));
   });
   applyLanes();
   const node = params.get("node");
   if (node) selectNode(node);
   document.addEventListener("keydown", (event) => {
     const current = document.activeElement;
-    if (!(current instanceof HTMLButtonElement) || !current.classList.contains("node-pin")) return;
+    if (!(current instanceof Element) || !current.classList.contains("node-pin")) return;
     if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
-    const pins = [...document.querySelectorAll<HTMLButtonElement>(".node-pin")].filter((pin) => !pin.hidden);
-    const index = pins.indexOf(current);
+    const pins = [...document.querySelectorAll<HTMLElement>(".node-pin")].filter((pin) => !pin.classList.contains("is-off"));
+    const index = pins.indexOf(current as HTMLElement);
     if (index < 0) return;
     event.preventDefault();
     const next = pins[index + (event.key === "ArrowRight" ? 1 : -1)];
     if (!next) return;
-    selectNode(next.dataset.node ?? "");
+    selectNode(next.dataset.node ?? "", next.dataset.place ?? "");
     next.focus();
   });
 }
 
 function applyLanes(): void {
   const selectedLanes = [...document.querySelectorAll<HTMLInputElement>('input[name="lane"]:checked')].map((box) => box.value);
-  document.querySelectorAll<SVGPathElement>("[data-lane]").forEach((path) => {
-    path.toggleAttribute("hidden", !selectedLanes.includes(path.dataset.lane ?? ""));
+  document.querySelectorAll<Element>("[data-lane]").forEach((item) => {
+    const lane = (item as HTMLElement).dataset.lane ?? "";
+    item.classList.toggle("is-off", !selectedLanes.includes(lane));
   });
-  document.querySelectorAll<HTMLButtonElement>(".node-pin").forEach((pin) => {
-    const lanes = (pin.dataset.lanes ?? "").split(" ");
-    pin.hidden = !lanes.some((lane) => selectedLanes.includes(lane));
+  document.querySelectorAll<Element>(".node-pin").forEach((pin) => {
+    const lanes = ((pin as HTMLElement).dataset.lanes ?? "").split(" ").filter(Boolean);
+    pin.classList.toggle("is-off", !lanes.some((lane) => selectedLanes.includes(lane)));
   });
   const empty = document.querySelector<HTMLElement>("#map-empty");
   if (empty) empty.hidden = selectedLanes.length !== 0;
 }
 
-function selectNode(id: string): void {
+function selectNode(id: string, placeId = ""): void {
   const node = nodes.find((item) => item.id === id);
+  const linked = placeId || nodePlaces[id]?.[0] || "";
+  const place = placeById.get(linked);
   const panel = document.querySelector<HTMLElement>("#node-panel");
-  if (!node || !panel) return;
-  document.querySelectorAll<HTMLButtonElement>("[data-node]").forEach((button) => {
-    button.setAttribute("aria-pressed", button.dataset.node === id ? "true" : "false");
+  if ((!node && !place) || !panel) return;
+  document.querySelectorAll<HTMLElement>(".node-pin").forEach((button) => {
+    const on = (id && button.dataset.node === id && (!placeId || button.dataset.place === placeId)) || (!id && placeId && button.dataset.place === placeId);
+    button.setAttribute("aria-pressed", on ? "true" : "false");
   });
-  const srcs = node.sources
+  const srcs = (node?.sources ?? [])
     .map((sid) => {
       const src = sourceById.get(sid);
       return src ? `<a class="src" href="./sources.html#${esc(sid)}">${esc(sid)} ${esc(src.title)}</a>` : "";
     })
     .join("");
-  panel.innerHTML = `<p class="kicker">${esc(node.id)} · ${esc(ARMY_LABEL[node.army] ?? node.army)}</p>
-    <h2>${esc(node.name)}</h2>
-    <p>${esc(node.role)}</p>
-    <p>今地：${esc(node.modern)}</p>
-    <p>时间：${esc(node.date)}</p>
-    <p class="warn">这个圆点只标在示意图上，位置是版面顺序，不是经纬度，也不能连成精确行军轨迹。</p>
-    <p class="sourceline"><span>来源</span>${srcs}</p>`;
+  const coord = place
+    ? `<p>${esc(place.name)}，${place.lat.toFixed(2)}°N，${place.lon.toFixed(2)}°E。几何级别是${esc(levelLabel(place.geometry_level))}。${esc(place.note)}</p><p><a href="${esc(place.wikidata)}">Wikidata 上的这条坐标</a></p>`
+    : `<p>这个地点还没有单独核验到可以打点的坐标，图上不补点。</p>`;
+  const heading = node ? node.name : place?.name ?? "";
+  const army = node ? ARMY_LABEL[node.army] ?? node.army : "";
+  panel.innerHTML = `<p>${esc(node?.id ?? place?.id ?? "")} ${esc(army)}</p>
+    <h2>${esc(heading)}</h2>
+    ${node ? `<p>${esc(node.role)}</p><p>今地：${esc(node.modern)}</p><p>时间：${esc(node.date)}</p>` : ""}
+    ${coord}
+    <p class="warn">示意图，非精确行军轨迹。</p>
+    ${srcs ? `<p class="sourceline"><span>来源</span>${srcs}</p>` : ""}`;
+  if (!node) return;
   const params = new URLSearchParams(location.search);
   params.set("node", id);
   history.replaceState(null, "", `${location.pathname}?${params}${location.hash}`);
